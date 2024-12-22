@@ -2,6 +2,10 @@ import SwiftUI
 
 /// Final view shown when setup is complete
 struct SuccessView: View {
+    @State private var extensionEnabled = false
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    
     var body: some View {
         VStack(spacing: 24) {
             // Success checkmark icon with gradient
@@ -37,7 +41,9 @@ struct SuccessView: View {
                 .fixedSize(horizontal: false, vertical: true)
             
             // Close app button with gradient
-            Button(action: { exit(0) }) {
+            Button(action: { 
+                checkAndReloadBlocker()
+            }) {
                 Text("Close App")
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
@@ -54,5 +60,76 @@ struct SuccessView: View {
             }
             .buttonStyle(.plain)
         }
+        .onAppear {
+            checkExtensionStatus()
+        }
+        .alert("Extension Status", isPresented: $showingAlert) {
+            Button("OK", role: .cancel) {
+                if extensionEnabled {
+                    exit(0)
+                }
+            }
+        } message: {
+            Text(alertMessage)
+        }
+    }
+    
+    private func checkAndReloadBlocker() {
+        checkExtensionStatus { isEnabled in
+            if isEnabled {
+                reloadContentBlocker()
+                exit(0)
+            } else {
+                showingAlert = true
+                alertMessage = "Please enable the Safari extension in Settings before closing the app."
+            }
+        }
+    }
+    
+    private func checkExtensionStatus(completion: @escaping (Bool) -> Void = { _ in }) {
+        SFContentBlockerManager.getStateOfContentBlocker(
+            withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.showingAlert = true
+                        self.alertMessage = "Error checking extension: \(error.localizedDescription)"
+                        completion(false)
+                        return
+                    }
+                    
+                    self.extensionEnabled = state?.isEnabled ?? false
+                    completion(self.extensionEnabled)
+                }
+        }
+    }
+    
+    private func reloadContentBlocker() {
+        SFContentBlockerManager.reloadContentBlocker(
+            withIdentifier: "io.abless.ContentBlockerExtension") { error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self.showingAlert = true
+                        self.alertMessage = "Error reloading blocker: \(error.localizedDescription)"
+                    }
+                }
+        }
+    }
+}
+
+// Called at completion
+func reloadContentBlocker() {
+    SFContentBlockerManager.reloadContentBlocker(
+        withIdentifier: "io.abless.ContentBlockerExtension") { error in
+        if let error = error {
+            // Show alert to user
+        }
+    }
+}
+
+// Add extension status checking
+func checkExtensionStatus() {
+    SFContentBlockerManager.getStateOfContentBlocker(
+        withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
+        // Update UI based on state
     }
 } 
