@@ -6,42 +6,69 @@ struct SuccessView: View {
     @State private var extensionEnabled = false
     @State private var showingAlert = false
     @State private var alertMessage = ""
+    @State private var gradientRotation = 0.0
+    
+    // Futuristic gradient colors
+    private let gradientColors: [Color] = [
+        .blue, .purple, .pink, .cyan
+    ]
     
     var body: some View {
         VStack(spacing: 24) {
-            // Success checkmark icon with gradient
+            // Animated success icon with multi-color gradient
             Image(systemName: "checkmark.circle.fill")
-                .font(.system(size: 80))
+                .font(.system(size: 100))
                 .foregroundStyle(
-                    LinearGradient(
-                        colors: [.green, .mint],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+                    AngularGradient(
+                        colors: gradientColors,
+                        center: .center,
+                        angle: .degrees(gradientRotation)
                     )
                 )
-                .shadow(color: .green.opacity(0.3), radius: 10, x: 0, y: 5)
+                .shadow(color: .blue.opacity(0.5), radius: 15, x: 0, y: 0)
                 .padding(.bottom, 8)
+                .onAppear {
+                    withAnimation(.linear(duration: 10).repeatForever(autoreverses: false)) {
+                        gradientRotation = 360
+                    }
+                }
             
-            // Success message
+            // Success message with glowing effect
             Text("Setup Complete!")
-                .font(.title)
-                .bold()
+                .font(.system(size: 32, weight: .bold, design: .rounded))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.primary, .primary.opacity(0.7)],
+                        colors: [.cyan, .blue, .purple],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
                 )
+                .shadow(color: .blue.opacity(0.5), radius: 10)
             
-            // Success description
+            // Success description with modern styling
             Text("You can now enjoy YouTube, Instagram, and TikTok in Safari without distracting short videos!")
                 .multilineTextAlignment(.center)
-                .font(.body)
+                .font(.system(.body, design: .rounded))
                 .foregroundColor(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [.blue.opacity(0.5), .purple.opacity(0.5)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1
+                                )
+                        )
+                )
             
-            // Close app button with gradient
+            // Futuristic close button
             Button(action: { 
                 checkAndReloadBlocker()
             }) {
@@ -49,18 +76,39 @@ struct SuccessView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(
-                        LinearGradient(
-                            colors: [.green, .mint],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
+                        ZStack {
+                            // Animated gradient background
+                            LinearGradient(
+                                colors: [.cyan, .blue, .purple],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                            
+                            // Glassmorphism overlay
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(.ultraThinMaterial.opacity(0.3))
+                        }
                     )
                     .foregroundColor(.white)
                     .cornerRadius(16)
-                    .shadow(color: .green.opacity(0.3), radius: 8, x: 0, y: 4)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.white.opacity(0.3), lineWidth: 1)
+                    )
+                    .shadow(color: .blue.opacity(0.5), radius: 10, x: 0, y: 4)
             }
             .buttonStyle(.plain)
         }
+        .padding(24)
+        .background(
+            // Animated background gradient
+            LinearGradient(
+                colors: [.black, .blue.opacity(0.2)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        )
         .onAppear {
             checkExtensionStatus()
         }
