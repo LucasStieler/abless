@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A08EB2FD2D184AD1005D2E99 /* ContentBlockerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A08EB2E52D184AD1005D2E99 /* ContentBlockerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A08EB2A42D182BE3005D2E99 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,13 +25,45 @@
 			remoteGlobalIDString = A08EB2922D182BDF005D2E99;
 			remoteInfo = abless;
 		};
+		A08EB2FB2D184AD1005D2E99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A08EB28B2D182BDF005D2E99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A08EB2E42D184AD1005D2E99;
+			remoteInfo = ContentBlockerExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A08EB2FE2D184AD2005D2E99 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A08EB2FD2D184AD1005D2E99 /* ContentBlockerExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A08EB2932D182BDF005D2E99 /* abless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = abless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08EB2A32D182BE3005D2E99 /* ablessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ablessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08EB2AD2D182BE3005D2E99 /* ablessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ablessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08EB2E52D184AD1005D2E99 /* ContentBlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ContentBlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A08EB3012D184AD2005D2E99 /* Exceptions for "ContentBlockerExtension" folder in "ContentBlockerExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A08EB2E42D184AD1005D2E99 /* ContentBlockerExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A08EB2952D182BDF005D2E99 /* abless */ = {
@@ -43,6 +79,18 @@
 		A08EB2B02D182BE3005D2E99 /* ablessUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ablessUITests;
+			sourceTree = "<group>";
+		};
+		A08EB2E62D184AD1005D2E99 /* ContentBlockerExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A08EB3012D184AD2005D2E99 /* Exceptions for "ContentBlockerExtension" folder in "ContentBlockerExtension" target */,
+			);
+			explicitFolders = (
+				Resources/_locales,
+				Resources/images,
+			);
+			path = ContentBlockerExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +117,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A08EB2E22D184AD1005D2E99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +133,7 @@
 				A08EB2952D182BDF005D2E99 /* abless */,
 				A08EB2A62D182BE3005D2E99 /* ablessTests */,
 				A08EB2B02D182BE3005D2E99 /* ablessUITests */,
+				A08EB2E62D184AD1005D2E99 /* ContentBlockerExtension */,
 				A08EB2942D182BDF005D2E99 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +144,7 @@
 				A08EB2932D182BDF005D2E99 /* abless.app */,
 				A08EB2A32D182BE3005D2E99 /* ablessTests.xctest */,
 				A08EB2AD2D182BE3005D2E99 /* ablessUITests.xctest */,
+				A08EB2E52D184AD1005D2E99 /* ContentBlockerExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,10 +159,12 @@
 				A08EB28F2D182BDF005D2E99 /* Sources */,
 				A08EB2902D182BDF005D2E99 /* Frameworks */,
 				A08EB2912D182BDF005D2E99 /* Resources */,
+				A08EB2FE2D184AD2005D2E99 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A08EB2FC2D184AD1005D2E99 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A08EB2952D182BDF005D2E99 /* abless */,
@@ -163,6 +222,28 @@
 			productReference = A08EB2AD2D182BE3005D2E99 /* ablessUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		A08EB2E42D184AD1005D2E99 /* ContentBlockerExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A08EB3022D184AD2005D2E99 /* Build configuration list for PBXNativeTarget "ContentBlockerExtension" */;
+			buildPhases = (
+				A08EB2E12D184AD1005D2E99 /* Sources */,
+				A08EB2E22D184AD1005D2E99 /* Frameworks */,
+				A08EB2E32D184AD1005D2E99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A08EB2E62D184AD1005D2E99 /* ContentBlockerExtension */,
+			);
+			name = ContentBlockerExtension;
+			packageProductDependencies = (
+			);
+			productName = ContentBlockerExtension;
+			productReference = A08EB2E52D184AD1005D2E99 /* ContentBlockerExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +265,9 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = A08EB2922D182BDF005D2E99;
 					};
+					A08EB2E42D184AD1005D2E99 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 				};
 			};
 			buildConfigurationList = A08EB28E2D182BDF005D2E99 /* Build configuration list for PBXProject "abless" */;
@@ -203,6 +287,7 @@
 				A08EB2922D182BDF005D2E99 /* abless */,
 				A08EB2A22D182BE3005D2E99 /* ablessTests */,
 				A08EB2AC2D182BE3005D2E99 /* ablessUITests */,
+				A08EB2E42D184AD1005D2E99 /* ContentBlockerExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +308,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A08EB2AB2D182BE3005D2E99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A08EB2E32D184AD1005D2E99 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +345,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A08EB2E12D184AD1005D2E99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +364,11 @@
 			isa = PBXTargetDependency;
 			target = A08EB2922D182BDF005D2E99 /* abless */;
 			targetProxy = A08EB2AE2D182BE3005D2E99 /* PBXContainerItemProxy */;
+		};
+		A08EB2FC2D184AD1005D2E99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A08EB2E42D184AD1005D2E99 /* ContentBlockerExtension */;
+			targetProxy = A08EB2FB2D184AD1005D2E99 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -518,6 +622,66 @@
 			};
 			name = Release;
 		};
+		A08EB2FF2D184AD2005D2E99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HXK76KBK7K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ContentBlockerExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ContentBlockerExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.abless.abless.ContentBlockerExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A08EB3002D184AD2005D2E99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HXK76KBK7K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ContentBlockerExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ContentBlockerExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.abless.abless.ContentBlockerExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -553,6 +717,15 @@
 			buildConfigurations = (
 				A08EB2BE2D182BE3005D2E99 /* Debug */,
 				A08EB2BF2D182BE3005D2E99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A08EB3022D184AD2005D2E99 /* Build configuration list for PBXNativeTarget "ContentBlockerExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08EB2FF2D184AD2005D2E99 /* Debug */,
+				A08EB3002D184AD2005D2E99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

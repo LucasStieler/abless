@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SafariServices
 
 struct ContentView: View {
     @State private var currentStep = 0
@@ -136,6 +137,15 @@ struct WelcomeView: View {
                     .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
             }
             .buttonStyle(.plain)
+        }
+    }
+}
+
+func reloadContentBlocker() {
+    SFContentBlockerManager.reloadContentBlocker(
+        withIdentifier: "io.abless.ContentBlockerExtension") { error in
+        if let error = error {
+            print("Error reloading content blocker: \(error)")
         }
     }
 }
