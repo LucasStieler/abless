@@ -1,4 +1,5 @@
 import SwiftUI
+import SafariServices
 
 /// Final view shown when setup is complete
 struct SuccessView: View {
@@ -113,23 +114,5 @@ struct SuccessView: View {
                     }
                 }
         }
-    }
-}
-
-// Called at completion
-func reloadContentBlocker() {
-    SFContentBlockerManager.reloadContentBlocker(
-        withIdentifier: "io.abless.ContentBlockerExtension") { error in
-        if let error = error {
-            // Show alert to user
-        }
-    }
-}
-
-// Add extension status checking
-func checkExtensionStatus() {
-    SFContentBlockerManager.getStateOfContentBlocker(
-        withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
-        // Update UI based on state
     }
 } 
