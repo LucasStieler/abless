@@ -9,6 +9,18 @@
   },
   {
     "trigger": {
+      "url-filter": ".*://.*\\.youtube\\.com/.*",
+      "resource-type": ["script"],
+      "if-domain": ["*youtube.com"],
+      "unless-domain": ["music.youtube.com"]
+    },
+    "action": {
+      "type": "css-display-none",
+      "selector": "ytd-reel-video-renderer, ytd-rich-grid-slim-media, ytd-rich-section-renderer:has(#shorts-container)"
+    }
+  },
+  {
+    "trigger": {
       "url-filter": ".*://.*\\.instagram\\.com/reels/.*"
     },
     "action": {
@@ -17,7 +29,28 @@
   },
   {
     "trigger": {
+      "url-filter": ".*://.*\\.instagram\\.com/.*",
+      "resource-type": ["script"],
+      "if-domain": ["*instagram.com"]
+    },
+    "action": {
+      "type": "css-display-none",
+      "selector": "div[role='presentation']:has(video), div[data-media-type='video'][role='menuitem']"
+    }
+  },
+  {
+    "trigger": {
       "url-filter": ".*://.*\\.tiktok\\.com/.*"
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": ".*://.*\\.tiktok\\.com/api/.*",
+      "resource-type": ["xmlhttprequest"],
+      "if-domain": ["*tiktok.com"]
     },
     "action": {
       "type": "block"
