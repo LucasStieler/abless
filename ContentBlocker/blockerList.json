@@ -1,0 +1,26 @@
+[
+  {
+    "trigger": {
+      "url-filter": ".*://.*\\.youtube\\.com/shorts/.*"
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": ".*://.*\\.instagram\\.com/reels/.*"
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": ".*://.*\\.tiktok\\.com/.*"
+    },
+    "action": {
+      "type": "block"
+    }
+  }
+] 
