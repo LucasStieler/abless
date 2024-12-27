@@ -30,21 +30,21 @@
 			containerPortal = A08EB28B2D182BDF005D2E99 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A08EB2922D182BDF005D2E99;
-			remoteInfo = abless;
+			remoteInfo = Banish;
 		};
 		A08EB2AE2D182BE3005D2E99 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A08EB28B2D182BDF005D2E99 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A08EB2922D182BDF005D2E99;
-			remoteInfo = abless;
+			remoteInfo = Banish;
 		};
 		A08EB2FB2D184AD1005D2E99 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A08EB28B2D182BDF005D2E99 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A08EB2E42D184AD1005D2E99;
-			remoteInfo = ContentBlockerExtension;
+				containerPortal = A08EB28B2D182BDF005D2E99 /* Project object */;
+				proxyType = 1;
+				remoteGlobalIDString = A08EB2E42D184AD1005D2E99;
+				remoteInfo = ContentBlockerExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -63,9 +63,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A08EB2932D182BDF005D2E99 /* abless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = abless.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A08EB2A32D182BE3005D2E99 /* ablessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ablessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A08EB2AD2D182BE3005D2E99 /* ablessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ablessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08EB2932D182BDF005D2E99 /* Banish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Banish.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08EB2A32D182BE3005D2E99 /* BanishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BanishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08EB2AD2D182BE3005D2E99 /* BanishUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BanishUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08EB2E52D184AD1005D2E99 /* ContentBlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ContentBlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -187,12 +187,12 @@
 			packageProductDependencies = (
 			);
 			productName = Banish;
-			productReference = A08EB2932D182BDF005D2E99 /* abless.app */;
+			productReference = A08EB2932D182BDF005D2E99 /* Banish.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A08EB2A22D182BE3005D2E99 /* ablessTests */ = {
+		A08EB2A22D182BE3005D2E99 /* BanishTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A08EB2BA2D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "ablessTests" */;
+			buildConfigurationList = A08EB2BA2D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "BanishTests" */;
 			buildPhases = (
 				A08EB29F2D182BE3005D2E99 /* Sources */,
 				A08EB2A02D182BE3005D2E99 /* Frameworks */,
@@ -206,16 +206,16 @@
 			fileSystemSynchronizedGroups = (
 				A08EB2A62D182BE3005D2E99 /* BanishTests */,
 			);
-			name = ablessTests;
+			name = BanishTests;
 			packageProductDependencies = (
 			);
-			productName = ablessTests;
-			productReference = A08EB2A32D182BE3005D2E99 /* ablessTests.xctest */;
+			productName = BanishTests;
+			productReference = A08EB2A32D182BE3005D2E99 /* BanishTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A08EB2AC2D182BE3005D2E99 /* ablessUITests */ = {
+		A08EB2AC2D182BE3005D2E99 /* BanishUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A08EB2BD2D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "ablessUITests" */;
+			buildConfigurationList = A08EB2BD2D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "BanishUITests" */;
 			buildPhases = (
 				A08EB2A92D182BE3005D2E99 /* Sources */,
 				A08EB2AA2D182BE3005D2E99 /* Frameworks */,
@@ -229,11 +229,11 @@
 			fileSystemSynchronizedGroups = (
 				A08EB2B02D182BE3005D2E99 /* BanishUITests */,
 			);
-			name = ablessUITests;
+			name = BanishUITests;
 			packageProductDependencies = (
 			);
-			productName = ablessUITests;
-			productReference = A08EB2AD2D182BE3005D2E99 /* ablessUITests.xctest */;
+			productName = BanishUITests;
+			productReference = A08EB2AD2D182BE3005D2E99 /* BanishUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		A08EB2E42D184AD1005D2E99 /* ContentBlockerExtension */ = {
@@ -285,7 +285,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A08EB28E2D182BDF005D2E99 /* Build configuration list for PBXProject "abless" */;
+			buildConfigurationList = A08EB28E2D182BDF005D2E99 /* Build configuration list for PBXProject "Banish" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -300,8 +300,8 @@
 			projectRoot = "";
 			targets = (
 				A08EB2922D182BDF005D2E99 /* Banish */,
-				A08EB2A22D182BE3005D2E99 /* ablessTests */,
-				A08EB2AC2D182BE3005D2E99 /* ablessUITests */,
+				A08EB2A22D182BE3005D2E99 /* BanishTests */,
+				A08EB2AC2D182BE3005D2E99 /* BanishUITests */,
 				A08EB2E42D184AD1005D2E99 /* ContentBlockerExtension */,
 			);
 		};
@@ -717,7 +717,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A08EB28E2D182BDF005D2E99 /* Build configuration list for PBXProject "abless" */ = {
+		A08EB28E2D182BDF005D2E99 /* Build configuration list for PBXProject "Banish" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A08EB2B52D182BE3005D2E99 /* Debug */,
@@ -726,7 +726,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A08EB2B72D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "abless" */ = {
+		A08EB2B72D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "Banish" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A08EB2B82D182BE3005D2E99 /* Debug */,
@@ -735,7 +735,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A08EB2BA2D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "ablessTests" */ = {
+		A08EB2BA2D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "BanishTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A08EB2BB2D182BE3005D2E99 /* Debug */,
@@ -744,7 +744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A08EB2BD2D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "ablessUITests" */ = {
+		A08EB2BD2D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "BanishUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A08EB2BE2D182BE3005D2E99 /* Debug */,

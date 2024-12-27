@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  abless
+//  Banish
 //
 //  Created by Lucas Maximilian Stieler on 22.12.24.
 //
@@ -50,10 +50,10 @@ struct ContentView: View {
     }
     
     private func checkSetupStatus() {
-        // Prüft auf konfliktbehaftete Apps
+        // Check for conflicting apps
         let detector = AppDetector()
         if detector.hasConflictingApps() {
-            currentStep = 2  // Geht zurück zum App-Erkennungsschritt
+            currentStep = 2  // Return to app detection step
             appState.resetSetup()
             return
         }
@@ -159,7 +159,7 @@ struct WelcomeView: View {
 
 func reloadContentBlocker() {
     SFContentBlockerManager.reloadContentBlocker(
-        withIdentifier: "io.abless.ContentBlockerExtension") { error in
+        withIdentifier: "io.banish.app.ContentBlockerExtension") { error in
         if let error = error {
             print("Error reloading content blocker: \(error)")
         }

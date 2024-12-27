@@ -89,7 +89,7 @@ struct SuccessView: View {
     
     private func checkExtensionStatus(completion: @escaping (Bool) -> Void = { _ in }) {
         SFContentBlockerManager.getStateOfContentBlocker(
-            withIdentifier: "io.abless.abless.ContentBlockerExtension") { state, error in
+            withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
                 DispatchQueue.main.async {
                     if let error = error {
                         print("Error checking extension: \(error.localizedDescription)")
