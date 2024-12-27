@@ -41,10 +41,10 @@
 		};
 		A08EB2FB2D184AD1005D2E99 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-				containerPortal = A08EB28B2D182BDF005D2E99 /* Project object */;
-				proxyType = 1;
-				remoteGlobalIDString = A08EB2E42D184AD1005D2E99;
-				remoteInfo = ContentBlockerExtension;
+			containerPortal = A08EB28B2D182BDF005D2E99 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A08EB2E42D184AD1005D2E99;
+			remoteInfo = ContentBlockerExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -70,6 +70,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A05966E32D1F25D000FB9E93 /* Exceptions for "Banish" folder in "Banish" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A08EB2922D182BDF005D2E99 /* Banish */;
+		};
 		A08EB3012D184AD2005D2E99 /* Exceptions for "ContentBlockerExtension" folder in "ContentBlockerExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -82,6 +89,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A08EB2952D182BDF005D2E99 /* Banish */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A05966E32D1F25D000FB9E93 /* Exceptions for "Banish" folder in "Banish" target */,
+			);
 			path = Banish;
 			sourceTree = "<group>";
 		};
