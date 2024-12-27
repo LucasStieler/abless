@@ -60,7 +60,7 @@ struct ContentView: View {
         
         // Check Safari extension status
         SFContentBlockerManager.getStateOfContentBlocker(
-            withIdentifier: "io.abless.abless.ContentBlockerExtension") { state, error in
+            withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
             DispatchQueue.main.async {
                 print("Checking extension status...")
                 if let error = error {
@@ -85,7 +85,7 @@ struct ContentView: View {
     
     private func checkExtensionStatus() {
         SFContentBlockerManager.getStateOfContentBlocker(
-            withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
+            withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
             DispatchQueue.main.async {
                 if let error = error {
                     print("Error checking extension: \(error.localizedDescription)")

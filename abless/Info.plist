@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleIdentifier</key>
-    <string>io.abless.abless</string>
+    <string>io.banish.app</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
         <string>com.google.ios.youtube</string>

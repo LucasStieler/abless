@@ -109,14 +109,15 @@ struct SuccessView: View {
     
     private func reloadContentBlocker() {
         SFContentBlockerManager.reloadContentBlocker(
-            withIdentifier: "io.abless.abless.ContentBlockerExtension") { error in
-                if let error = error {
-                    print("Error reloading blocker: \(error.localizedDescription)")
-                    DispatchQueue.main.async {
-                        self.showingAlert = true
-                        self.alertMessage = "Error reloading blocker: \(error.localizedDescription)"
-                    }
+            withIdentifier: "io.banish.app.ContentBlockerExtension"
+        ) { error in
+            if let error = error {
+                print("Error reloading blocker: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.showingAlert = true
+                    self.alertMessage = "Error reloading blocker: \(error.localizedDescription)"
                 }
+            }
         }
     }
 } 
