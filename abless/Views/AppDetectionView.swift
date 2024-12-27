@@ -1,13 +1,25 @@
 import SwiftUI
+import UIKit
 
 struct AppDetectionView: View {
     @Binding var currentStep: Int
     @State private var installedApps: [String] = []
     
     private let appSchemes = [
-        "youtube": "com.google.ios.youtube://",
-        "instagram": "instagram://",
-        "tiktok": "tiktok://"
+        "youtube": [
+            "youtube://",
+            "vnd.youtube://",
+            "youtube-app://",
+            "com.google.ios.youtube://"
+        ],
+        "instagram": [
+            "instagram://",
+            "instagram-stories://"
+        ],
+        "tiktok": [
+            "tiktok://",
+            "snssdk1233://"
+        ]
     ]
     
     var body: some View {
@@ -97,13 +109,22 @@ struct AppDetectionView: View {
     private func checkInstalledApps() {
         installedApps = []
         
-        for (app, scheme) in appSchemes {
-            if let url = URL(string: scheme) {
-                if UIApplication.shared.canOpenURL(url) {
-                    print("Found installed app: \(app) with scheme: \(scheme)")
-                    installedApps.append(app.capitalized)
+        print("Checking for installed apps...")
+        
+        for (app, schemes) in appSchemes {
+            for scheme in schemes {
+                if let url = URL(string: scheme) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        print("Found installed app: \(app) with scheme: \(scheme)")
+                        installedApps.append(app.capitalized)
+                        break
+                    } else {
+                        print("Could not open URL scheme: \(scheme)")
+                    }
                 }
             }
         }
+        
+        print("Installed apps found: \(installedApps)")
     }
 } 
