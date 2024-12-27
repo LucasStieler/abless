@@ -16,12 +16,5 @@
         <string>snssdk1233</string>
         <string>tiktok.com</string>
     </array>
-    <key>UIApplicationSceneManifest</key>
-    <dict>
-        <key>UIApplicationSupportsMultipleScenes</key>
-        <false/>
-        <key>UISceneConfigurations</key>
-        <dict/>
-    </dict>
 </dict>
 </plist> 
