@@ -9,74 +9,64 @@ import SwiftUI
 import SafariServices
 
 struct ContentView: View {
-    @State private var currentStep = 0
+    @StateObject private var appState = AppState()
+    @State private var currentStep = 1
+    @State private var hasConflictingApps = false
+    @State private var extensionEnabled = false
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                // Gradient progress indicator
-                ProgressView(value: Double(currentStep), total: 4)
-                    .padding(.horizontal, 24)
-                    .tint(.blue)
-                    .scaleEffect(y: 2)
-                    .padding(.vertical, 8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.ultraThinMaterial)
-                            .padding(.horizontal, 20)
-                    )
-                
-                Spacer()
-                
-                // Main content with enhanced card appearance
-                Group {
-                    switch currentStep {
-                    case 0:
-                        WelcomeView(currentStep: $currentStep)
-                    case 1:
-                        AppDetectionView(currentStep: $currentStep)
-                    case 2:
-                        SafariExtensionGuideView(currentStep: $currentStep)
-                    case 3:
-                        SafariLoginView(currentStep: $currentStep)
-                    case 4:
-                        SuccessView()
-                    default:
-                        EmptyView()
+        Group {
+            if appState.setupCompleted {
+                SuccessView()
+                    .onAppear {
+                        checkSetupStatus()
                     }
+            } else {
+                switch currentStep {
+                case 1:
+                    WelcomeView(currentStep: $currentStep)
+                case 2:
+                    AppDetectionView(currentStep: $currentStep)
+                        .onAppear {
+                            checkForConflictingApps()
+                        }
+                case 3:
+                    SafariExtensionGuideView(currentStep: $currentStep)
+                        .onAppear {
+                            checkExtensionStatus()
+                        }
+                case 4:
+                    SafariLoginView(currentStep: $currentStep)
+                case 5:
+                    SuccessView()
+                        .onAppear {
+                            appState.completeSetup()
+                        }
+                default:
+                    WelcomeView(currentStep: $currentStep)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(24)
-                .background(
-                    RoundedRectangle(cornerRadius: 24)
-                        .fill(Color(.systemBackground))
-                        .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 24)
-                                .stroke(LinearGradient(
-                                    colors: [.blue.opacity(0.5), .purple.opacity(0.5)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ), lineWidth: 1)
-                        )
-                )
-                .padding(.horizontal, 16)
-                
-                Spacer()
             }
-            .navigationTitle("Banish")
-            .navigationBarTitleDisplayMode(.inline)
-            .background(
-                LinearGradient(
-                    colors: [
-                        Color(.systemBackground),
-                        Color(.systemGray6).opacity(0.5)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-            )
+        }
+    }
+    
+    private func checkSetupStatus() {
+        // Check for conflicting apps
+        let detector = AppDetector()
+        if detector.hasConflictingApps() {
+            currentStep = 2
+            appState.resetSetup()
+            return
+        }
+        
+        // Check Safari extension status
+        SFContentBlockerManager.getStateOfContentBlocker(
+            withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
+            DispatchQueue.main.async {
+                if let isEnabled = state?.isEnabled, !isEnabled {
+                    currentStep = 3
+                    appState.resetSetup()
+                }
+            }
         }
     }
 }
@@ -147,6 +137,38 @@ func reloadContentBlocker() {
         if let error = error {
             print("Error reloading content blocker: \(error)")
         }
+    }
+}
+
+// Helper class for app detection
+class AppDetector {
+    private let appSchemes = [
+        "youtube": [
+            "youtube://",
+            "vnd.youtube://",
+            "youtube-app://",
+            "com.google.ios.youtube://"
+        ],
+        "instagram": [
+            "instagram://",
+            "instagram-stories://"
+        ],
+        "tiktok": [
+            "tiktok://",
+            "snssdk1233://"
+        ]
+    ]
+    
+    func hasConflictingApps() -> Bool {
+        for (_, schemes) in appSchemes {
+            for scheme in schemes {
+                if let url = URL(string: scheme),
+                   UIApplication.shared.canOpenURL(url) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }
 

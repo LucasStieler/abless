@@ -4,23 +4,7 @@ import UIKit
 struct AppDetectionView: View {
     @Binding var currentStep: Int
     @State private var installedApps: [String] = []
-    
-    private let appSchemes = [
-        "youtube": [
-            "youtube://",
-            "vnd.youtube://",
-            "youtube-app://",
-            "com.google.ios.youtube://"
-        ],
-        "instagram": [
-            "instagram://",
-            "instagram-stories://"
-        ],
-        "tiktok": [
-            "tiktok://",
-            "snssdk1233://"
-        ]
-    ]
+    private let detector = AppDetector()
     
     var body: some View {
         VStack(spacing: 24) {
@@ -111,7 +95,7 @@ struct AppDetectionView: View {
         
         print("Checking for installed apps...")
         
-        for (app, schemes) in appSchemes {
+        for (app, schemes) in detector.appSchemes {
             for scheme in schemes {
                 if let url = URL(string: scheme) {
                     if UIApplication.shared.canOpenURL(url) {
