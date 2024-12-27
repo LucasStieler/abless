@@ -1,4 +1,5 @@
 import SwiftUI
+import SafariServices
 
 /// View that guides users through enabling the Safari extension
 struct SafariExtensionGuideView: View {
