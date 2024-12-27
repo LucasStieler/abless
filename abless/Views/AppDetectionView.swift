@@ -93,15 +93,18 @@ struct AppDetectionView: View {
     private func checkInstalledApps() {
         installedApps = []
         
-        print("Checking for installed apps...")
+        print("Starting app detection check...")
         
         for (app, schemes) in detector.appSchemes {
+            var appFound = false
             for scheme in schemes {
                 if let url = URL(string: scheme) {
                     if UIApplication.shared.canOpenURL(url) {
                         print("Found installed app: \(app) with scheme: \(scheme)")
-                        installedApps.append(app.capitalized)
-                        break
+                        if !appFound {  // Prevent duplicate entries
+                            installedApps.append(app.capitalized)
+                            appFound = true
+                        }
                     } else {
                         print("Could not open URL scheme: \(scheme)")
                     }
@@ -110,5 +113,17 @@ struct AppDetectionView: View {
         }
         
         print("Installed apps found: \(installedApps)")
+    }
+    
+    private func isAppInstalled(_ appName: String) -> Bool {
+        if let schemes = detector.appSchemes[appName.lowercased()] {
+            for scheme in schemes {
+                if let url = URL(string: scheme),
+                   UIApplication.shared.canOpenURL(url) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 } 
