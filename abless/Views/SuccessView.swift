@@ -89,9 +89,10 @@ struct SuccessView: View {
     
     private func checkExtensionStatus(completion: @escaping (Bool) -> Void = { _ in }) {
         SFContentBlockerManager.getStateOfContentBlocker(
-            withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
+            withIdentifier: "io.abless.abless.ContentBlockerExtension") { state, error in
                 DispatchQueue.main.async {
                     if let error = error {
+                        print("Error checking extension: \(error.localizedDescription)")
                         self.showingAlert = true
                         self.alertMessage = "Error checking extension: \(error.localizedDescription)"
                         completion(false)
@@ -99,6 +100,7 @@ struct SuccessView: View {
                     }
                     
                     let isEnabled = state?.isEnabled ?? false
+                    print("Extension status: \(isEnabled)")
                     self.appState.updateExtensionStatus(isEnabled)
                     completion(isEnabled)
                 }
@@ -107,8 +109,9 @@ struct SuccessView: View {
     
     private func reloadContentBlocker() {
         SFContentBlockerManager.reloadContentBlocker(
-            withIdentifier: "io.abless.ContentBlockerExtension") { error in
+            withIdentifier: "io.abless.abless.ContentBlockerExtension") { error in
                 if let error = error {
+                    print("Error reloading blocker: \(error.localizedDescription)")
                     DispatchQueue.main.async {
                         self.showingAlert = true
                         self.alertMessage = "Error reloading blocker: \(error.localizedDescription)"
