@@ -3,7 +3,7 @@ import SafariServices
 
 /// Final view shown when setup is complete
 struct SuccessView: View {
-    @State private var extensionEnabled = false
+    @StateObject private var appState = AppState()
     @State private var showingAlert = false
     @State private var alertMessage = ""
     
@@ -66,7 +66,7 @@ struct SuccessView: View {
         }
         .alert("Extension Status", isPresented: $showingAlert) {
             Button("OK", role: .cancel) {
-                if extensionEnabled {
+                if appState.extensionEnabled {
                     exit(0)
                 }
             }
@@ -98,8 +98,9 @@ struct SuccessView: View {
                         return
                     }
                     
-                    self.extensionEnabled = state?.isEnabled ?? false
-                    completion(self.extensionEnabled)
+                    let isEnabled = state?.isEnabled ?? false
+                    self.appState.updateExtensionStatus(isEnabled)
+                    completion(isEnabled)
                 }
         }
     }

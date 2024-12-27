@@ -4,6 +4,8 @@ import SwiftUI
 struct SafariExtensionGuideView: View {
     /// Binding to track the current step in the setup process
     @Binding var currentStep: Int
+    @StateObject private var appState = AppState()
+    @State private var showingAlert = false
     
     var body: some View {
         VStack(spacing: 24) {
@@ -47,9 +49,7 @@ struct SafariExtensionGuideView: View {
             
             // Continue button with gradient styling
             Button(action: {
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                    currentStep += 1
-                }
+                checkExtensionAndContinue()
             }) {
                 Text("Continue")
                     .frame(maxWidth: .infinity)
@@ -66,6 +66,35 @@ struct SafariExtensionGuideView: View {
                     .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
             }
             .buttonStyle(.plain)
+        }
+        .alert("Extension Not Enabled", isPresented: $showingAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Please enable the Safari extension in Settings before continuing.")
+        }
+    }
+    
+    private func checkExtensionAndContinue() {
+        SFContentBlockerManager.getStateOfContentBlocker(
+            withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error checking extension: \(error.localizedDescription)")
+                    showingAlert = true
+                    return
+                }
+                
+                let isEnabled = state?.isEnabled ?? false
+                appState.updateExtensionStatus(isEnabled)
+                
+                if isEnabled {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                        currentStep += 1
+                    }
+                } else {
+                    showingAlert = true
+                }
+            }
         }
     }
 }
