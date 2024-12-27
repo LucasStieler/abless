@@ -166,9 +166,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A08EB2922D182BDF005D2E99 /* abless */ = {
+		A08EB2922D182BDF005D2E99 /* Banish */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A08EB2B72D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "abless" */;
+			buildConfigurationList = A08EB2B72D182BE3005D2E99 /* Build configuration list for PBXNativeTarget "Banish" */;
 			buildPhases = (
 				A08EB28F2D182BDF005D2E99 /* Sources */,
 				A08EB2902D182BDF005D2E99 /* Frameworks */,
@@ -183,10 +183,10 @@
 			fileSystemSynchronizedGroups = (
 				A08EB2952D182BDF005D2E99 /* abless */,
 			);
-			name = abless;
+			name = Banish;
 			packageProductDependencies = (
 			);
-			productName = abless;
+			productName = Banish;
 			productReference = A08EB2932D182BDF005D2E99 /* abless.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -299,7 +299,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A08EB2922D182BDF005D2E99 /* abless */,
+				A08EB2922D182BDF005D2E99 /* Banish */,
 				A08EB2A22D182BE3005D2E99 /* ablessTests */,
 				A08EB2AC2D182BE3005D2E99 /* ablessUITests */,
 				A08EB2E42D184AD1005D2E99 /* ContentBlockerExtension */,
@@ -372,12 +372,12 @@
 /* Begin PBXTargetDependency section */
 		A08EB2A52D182BE3005D2E99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A08EB2922D182BDF005D2E99 /* abless */;
+			target = A08EB2922D182BDF005D2E99 /* Banish */;
 			targetProxy = A08EB2A42D182BE3005D2E99 /* PBXContainerItemProxy */;
 		};
 		A08EB2AF2D182BE3005D2E99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A08EB2922D182BDF005D2E99 /* abless */;
+			target = A08EB2922D182BDF005D2E99 /* Banish */;
 			targetProxy = A08EB2AE2D182BE3005D2E99 /* PBXContainerItemProxy */;
 		};
 		A08EB2FC2D184AD1005D2E99 /* PBXTargetDependency */ = {
@@ -514,11 +514,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"abless/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Banish/Preview Content\"";
 				DEVELOPMENT_TEAM = HXK76KBK7K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = abless/Info.plist;
+				INFOPLIST_FILE = Banish/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ContentBlockerExtension;
 				INFOPLIST_KEY_LSApplicationQueriesSchemes = "com.google.ios.youtube youtube vnd.youtube youtube-app goog.youtube instagram instagram-stories instagram-reels tiktok snssdk1233 tiktok.com";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -552,11 +552,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"abless/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Banish/Preview Content\"";
 				DEVELOPMENT_TEAM = HXK76KBK7K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = abless/Info.plist;
+				INFOPLIST_FILE = Banish/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ContentBlockerExtension;
 				INFOPLIST_KEY_LSApplicationQueriesSchemes = "com.google.ios.youtube youtube vnd.youtube youtube-app goog.youtube instagram instagram-stories instagram-reels tiktok snssdk1233 tiktok.com";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -599,7 +599,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/abless.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/abless";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Banish.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Banish";
 			};
 			name = Debug;
 		};
@@ -618,7 +618,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/abless.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/abless";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Banish.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Banish";
 			};
 			name = Release;
 		};
@@ -635,7 +635,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = abless;
+				TEST_TARGET_NAME = Banish;
 			};
 			name = Debug;
 		};
@@ -652,7 +652,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = abless;
+				TEST_TARGET_NAME = Banish;
 			};
 			name = Release;
 		};
