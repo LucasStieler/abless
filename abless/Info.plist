@@ -1,1 +1,27 @@
- 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>com.google.ios.youtube</string>
+        <string>youtube</string>
+        <string>vnd.youtube</string>
+        <string>youtube-app</string>
+        <string>goog.youtube</string>
+        <string>instagram</string>
+        <string>instagram-stories</string>
+        <string>instagram-reels</string>
+        <string>tiktok</string>
+        <string>snssdk1233</string>
+        <string>tiktok.com</string>
+    </array>
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+        <key>UISceneConfigurations</key>
+        <dict/>
+    </dict>
+</dict>
+</plist> 
