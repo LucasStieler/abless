@@ -101,7 +101,7 @@ struct AppDetectionView: View {
                 if let url = URL(string: scheme) {
                     if UIApplication.shared.canOpenURL(url) {
                         print("Found installed app: \(app) with scheme: \(scheme)")
-                        if !appFound {  // Prevent duplicate entries
+                        if !appFound {  // Verhindert Duplikate
                             installedApps.append(app.capitalized)
                             appFound = true
                         }

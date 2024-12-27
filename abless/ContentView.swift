@@ -50,10 +50,10 @@ struct ContentView: View {
     }
     
     private func checkSetupStatus() {
-        // Check for conflicting apps
+        // Prüft auf konfliktbehaftete Apps
         let detector = AppDetector()
         if detector.hasConflictingApps() {
-            currentStep = 2
+            currentStep = 2  // Geht zurück zum App-Erkennungsschritt
             appState.resetSetup()
             return
         }
