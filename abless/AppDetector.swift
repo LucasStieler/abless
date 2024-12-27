@@ -1,7 +1,7 @@
 import UIKit
 
 class AppDetector {
-    let appSchemes = [
+    public let appSchemes = [
         "youtube": [
             "youtube://",
             "vnd.youtube://",
@@ -18,7 +18,7 @@ class AppDetector {
         ]
     ]
     
-    func hasConflictingApps() -> Bool {
+    public func hasConflictingApps() -> Bool {
         for (_, schemes) in appSchemes {
             for scheme in schemes {
                 if let url = URL(string: scheme),
