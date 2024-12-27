@@ -6,6 +6,8 @@ struct SuccessView: View {
     @StateObject private var appState = AppState()
     @State private var showingAlert = false
     @State private var alertMessage = ""
+    @State private var opacity = 1.0
+    @State private var scale = 1.0
     
     var body: some View {
         VStack(spacing: 24) {
@@ -43,7 +45,7 @@ struct SuccessView: View {
             
             // Close app button with gradient
             Button(action: { 
-                checkAndReloadBlocker()
+                closeAppWithAnimation()
             }) {
                 Text("Close App")
                     .frame(maxWidth: .infinity)
@@ -61,25 +63,27 @@ struct SuccessView: View {
             }
             .buttonStyle(.plain)
         }
-        .onAppear {
-            checkExtensionStatus()
-        }
-        .alert("Extension Status", isPresented: $showingAlert) {
-            Button("OK", role: .cancel) {
-                if appState.extensionEnabled {
-                    exit(0)
-                }
-            }
-        } message: {
-            Text(alertMessage)
+        .padding()
+        .opacity(opacity)
+        .scaleEffect(scale)
+        .alert(alertMessage, isPresented: $showingAlert) {
+            Button("OK", role: .cancel) { }
         }
     }
     
-    private func checkAndReloadBlocker() {
+    private func closeAppWithAnimation() {
         checkExtensionStatus { isEnabled in
             if isEnabled {
                 reloadContentBlocker()
-                exit(0)
+                // Animate out
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    opacity = 0
+                    scale = 0.8
+                }
+                // Wait for animation to complete before exiting
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    exit(0)
+                }
             } else {
                 showingAlert = true
                 alertMessage = "Please enable the Safari extension in Settings before closing the app."
