@@ -70,13 +70,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A03ABC7B2D1F1A3B00E6E22E /* Exceptions for "abless" folder in "abless" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = A08EB2922D182BDF005D2E99 /* abless */;
-		};
 		A08EB3012D184AD2005D2E99 /* Exceptions for "ContentBlockerExtension" folder in "ContentBlockerExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -89,9 +82,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A08EB2952D182BDF005D2E99 /* abless */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				A03ABC7B2D1F1A3B00E6E22E /* Exceptions for "abless" folder in "abless" target */,
-			);
 			path = abless;
 			sourceTree = "<group>";
 		};
@@ -527,7 +517,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"abless/Preview Content\"";
 				DEVELOPMENT_TEAM = HXK76KBK7K;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = abless/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ContentBlockerExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -535,19 +525,34 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.abless.abless.ContentBlockerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.abless.abless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				INFOPLIST_KEY_LSApplicationQueriesSchemes = (
+					"com.google.ios.youtube",
+					youtube,
+					"vnd.youtube",
+					"youtube-app",
+					"goog.youtube",
+					instagram,
+					"instagram-stories",
+					"instagram-reels",
+					tiktok,
+					snssdk1233,
+					"tiktok.com",
+				);
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 			};
 			name = Debug;
 		};
@@ -561,7 +566,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"abless/Preview Content\"";
 				DEVELOPMENT_TEAM = HXK76KBK7K;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = abless/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ContentBlockerExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -569,19 +574,34 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.abless.abless.ContentBlockerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = io.abless.abless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				INFOPLIST_KEY_LSApplicationQueriesSchemes = (
+					"com.google.ios.youtube",
+					youtube,
+					"vnd.youtube",
+					"youtube-app",
+					"goog.youtube",
+					instagram,
+					"instagram-stories",
+					"instagram-reels",
+					tiktok,
+					snssdk1233,
+					"tiktok.com",
+				);
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 			};
 			name = Release;
 		};
@@ -671,7 +691,6 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
@@ -701,7 +720,6 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
