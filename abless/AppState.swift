@@ -8,8 +8,15 @@ class AppState: ObservableObject {
         }
     }
     
+    @Published var extensionEnabled: Bool {
+        didSet {
+            UserDefaults.standard.set(extensionEnabled, forKey: "extensionEnabled")
+        }
+    }
+    
     init() {
         self.setupCompleted = UserDefaults.standard.bool(forKey: "setupCompleted")
+        self.extensionEnabled = UserDefaults.standard.bool(forKey: "extensionEnabled")
     }
     
     func completeSetup() {
@@ -18,5 +25,9 @@ class AppState: ObservableObject {
     
     func resetSetup() {
         setupCompleted = false
+    }
+    
+    func updateExtensionStatus(_ enabled: Bool) {
+        extensionEnabled = enabled
     }
 } 

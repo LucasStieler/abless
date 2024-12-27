@@ -69,6 +69,24 @@ struct ContentView: View {
             }
         }
     }
+    
+    private func checkForConflictingApps() {
+        let detector = AppDetector()
+        hasConflictingApps = detector.hasConflictingApps()
+    }
+    
+    private func checkExtensionStatus() {
+        SFContentBlockerManager.getStateOfContentBlocker(
+            withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error checking extension: \(error.localizedDescription)")
+                    return
+                }
+                extensionEnabled = state?.isEnabled ?? false
+            }
+        }
+    }
 }
 
 struct WelcomeView: View {

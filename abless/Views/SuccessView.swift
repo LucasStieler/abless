@@ -115,12 +115,4 @@ struct SuccessView: View {
                 }
         }
     }
-}
-
-// Add extension status checking
-func checkExtensionStatus() {
-    SFContentBlockerManager.getStateOfContentBlocker(
-        withIdentifier: "io.abless.ContentBlockerExtension") { state, error in
-        // Update UI based on state
-    }
 } 

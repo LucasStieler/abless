@@ -1,75 +1,11 @@
 [
   {
-    "trigger": {
-      "url-filter": ".*://.*\\.youtube\\.com/shorts/.*"
-    },
     "action": {
       "type": "block"
-    }
-  },
-  {
-    "trigger": {
-      "url-filter": ".*://.*\\.youtube\\.com/.*",
-      "resource-type": ["script"],
-      "if-domain": ["*youtube.com"],
-      "unless-domain": ["music.youtube.com"]
     },
-    "action": {
-      "type": "css-display-none",
-      "selector": "ytd-reel-video-renderer, ytd-rich-section-renderer:has(#shorts-container)"
-    }
-  },
-  {
     "trigger": {
-      "url-filter": ".*://.*\\.youtube\\.com/browse_ajax.*",
-      "resource-type": ["xmlhttprequest"]
-    },
-    "action": {
-      "type": "block-cookies"
-    }
-  },
-  {
-    "trigger": {
-      "url-filter": ".*://.*\\.instagram\\.com/reels/.*"
-    },
-    "action": {
-      "type": "block"
-    }
-  },
-  {
-    "trigger": {
-      "url-filter": ".*://.*\\.instagram\\.com/api/v1/feed/reels_tray/.*",
-      "resource-type": ["xmlhttprequest"]
-    },
-    "action": {
-      "type": "block"
-    }
-  },
-  {
-    "trigger": {
-      "url-filter": ".*://.*\\.instagram\\.com/.*",
-      "resource-type": ["script"]
-    },
-    "action": {
-      "type": "css-display-none",
-      "selector": "div[role='presentation']:has(video)"
-    }
-  },
-  {
-    "trigger": {
-      "url-filter": ".*://.*\\.tiktok\\.com/.*"
-    },
-    "action": {
-      "type": "block"
-    }
-  },
-  {
-    "trigger": {
-      "url-filter": ".*://.*\\.tiktok\\.com/api/recommend/item_list/.*",
-      "resource-type": ["xmlhttprequest"]
-    },
-    "action": {
-      "type": "block"
+      "url-filter": ".*",
+      "if-domain": ["*youtube.com", "*instagram.com", "*tiktok.com"]
     }
   }
 ] 
