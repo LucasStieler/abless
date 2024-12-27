@@ -70,6 +70,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A03ABCEA2D1F1D8B00E6E22E /* Exceptions for "abless" folder in "abless" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A08EB2922D182BDF005D2E99 /* abless */;
+		};
 		A08EB3012D184AD2005D2E99 /* Exceptions for "ContentBlockerExtension" folder in "ContentBlockerExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -82,6 +89,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A08EB2952D182BDF005D2E99 /* abless */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A03ABCEA2D1F1D8B00E6E22E /* Exceptions for "abless" folder in "abless" target */,
+			);
 			path = abless;
 			sourceTree = "<group>";
 		};
@@ -520,7 +530,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = abless/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ContentBlockerExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_LSApplicationQueriesSchemes = "com.google.ios.youtube youtube vnd.youtube youtube-app goog.youtube instagram instagram-stories instagram-reels tiktok snssdk1233 tiktok.com";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -537,24 +552,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				INFOPLIST_KEY_LSApplicationQueriesSchemes = (
-					"com.google.ios.youtube",
-					youtube,
-					"vnd.youtube",
-					"youtube-app",
-					"goog.youtube",
-					instagram,
-					"instagram-stories",
-					"instagram-reels",
-					tiktok,
-					snssdk1233,
-					"tiktok.com",
-				);
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 			};
 			name = Debug;
 		};
@@ -571,7 +568,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = abless/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ContentBlockerExtension;
+				INFOPLIST_KEY_LSApplicationQueriesSchemes = "com.google.ios.youtube youtube vnd.youtube youtube-app goog.youtube instagram instagram-stories instagram-reels tiktok snssdk1233 tiktok.com";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -588,24 +591,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				INFOPLIST_KEY_LSApplicationQueriesSchemes = (
-					"com.google.ios.youtube",
-					youtube,
-					"vnd.youtube",
-					"youtube-app",
-					"goog.youtube",
-					instagram,
-					"instagram-stories",
-					"instagram-reels",
-					tiktok,
-					snssdk1233,
-					"tiktok.com",
-				);
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 			};
 			name = Release;
 		};
