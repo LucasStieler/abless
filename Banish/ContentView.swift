@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var currentStep = 1
     @State private var hasConflictingApps = false
     @State private var extensionEnabled = false
+    @State private var showError = false
+    @State private var errorMessage = ""
     
     var body: some View {
         Group {
@@ -84,14 +86,37 @@ struct ContentView: View {
     }
     
     private func checkExtensionStatus() {
+        print("Checking extension status...")
         SFContentBlockerManager.getStateOfContentBlocker(
             withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
             DispatchQueue.main.async {
                 if let error = error {
-                    print("Error checking extension: \(error.localizedDescription)")
+                    print("Extension error: \(error.localizedDescription)")
+                    showError = true
+                    errorMessage = error.localizedDescription
                     return
                 }
+                
                 extensionEnabled = state?.isEnabled ?? false
+                print("Extension enabled: \(extensionEnabled)")
+            }
+        }
+    }
+    
+    func runDiagnostics() {
+        print("=== Banish Diagnostics ===")
+        print("Bundle ID: \(Bundle.main.bundleIdentifier ?? "unknown")")
+        print("Extension enabled: \(extensionEnabled)")
+        print("Current step: \(currentStep)")
+        print("Has conflicting apps: \(hasConflictingApps)")
+        print("Setup completed: \(appState.setupCompleted)")
+        
+        // Check extension
+        SFContentBlockerManager.getStateOfContentBlocker(
+            withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
+            print("Extension state: \(String(describing: state?.isEnabled))")
+            if let error = error {
+                print("Extension error: \(error)")
             }
         }
     }

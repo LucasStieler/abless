@@ -108,14 +108,17 @@ struct SuccessView: View {
     }
     
     private func reloadContentBlocker() {
+        print("Reloading content blocker...")
         SFContentBlockerManager.reloadContentBlocker(
             withIdentifier: "io.banish.app.ContentBlockerExtension"
         ) { error in
-            if let error = error {
-                print("Error reloading blocker: \(error.localizedDescription)")
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Reload error: \(error.localizedDescription)")
                     self.showingAlert = true
                     self.alertMessage = "Error reloading blocker: \(error.localizedDescription)"
+                } else {
+                    print("Content blocker reloaded successfully")
                 }
             }
         }
