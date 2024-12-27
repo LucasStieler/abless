@@ -5,7 +5,7 @@ struct AppDetectionView: View {
     @State private var installedApps: [String] = []
     
     private let appSchemes = [
-        "youtube": "youtube://",
+        "youtube": "com.google.ios.youtube://",
         "instagram": "instagram://",
         "tiktok": "tiktok://"
     ]
@@ -100,6 +100,7 @@ struct AppDetectionView: View {
         for (app, scheme) in appSchemes {
             if let url = URL(string: scheme) {
                 if UIApplication.shared.canOpenURL(url) {
+                    print("Found installed app: \(app) with scheme: \(scheme)")
                     installedApps.append(app.capitalized)
                 }
             }
