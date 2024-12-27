@@ -80,19 +80,19 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A08EB2952D182BDF005D2E99 /* abless */ = {
+		A08EB2952D182BDF005D2E99 /* Banish */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = abless;
+			path = Banish;
 			sourceTree = "<group>";
 		};
-		A08EB2A62D182BE3005D2E99 /* ablessTests */ = {
+		A08EB2A62D182BE3005D2E99 /* BanishTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ablessTests;
+			path = BanishTests;
 			sourceTree = "<group>";
 		};
-		A08EB2B02D182BE3005D2E99 /* ablessUITests */ = {
+		A08EB2B02D182BE3005D2E99 /* BanishUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ablessUITests;
+			path = BanishUITests;
 			sourceTree = "<group>";
 		};
 		A08EB2E62D184AD1005D2E99 /* ContentBlockerExtension */ = {
@@ -144,9 +144,9 @@
 		A08EB28A2D182BDF005D2E99 = {
 			isa = PBXGroup;
 			children = (
-				A08EB2952D182BDF005D2E99 /* abless */,
-				A08EB2A62D182BE3005D2E99 /* ablessTests */,
-				A08EB2B02D182BE3005D2E99 /* ablessUITests */,
+				A08EB2952D182BDF005D2E99 /* Banish */,
+				A08EB2A62D182BE3005D2E99 /* BanishTests */,
+				A08EB2B02D182BE3005D2E99 /* BanishUITests */,
 				A08EB2E62D184AD1005D2E99 /* ContentBlockerExtension */,
 				A08EB2942D182BDF005D2E99 /* Products */,
 			);
@@ -155,9 +155,9 @@
 		A08EB2942D182BDF005D2E99 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A08EB2932D182BDF005D2E99 /* abless.app */,
-				A08EB2A32D182BE3005D2E99 /* ablessTests.xctest */,
-				A08EB2AD2D182BE3005D2E99 /* ablessUITests.xctest */,
+				A08EB2932D182BDF005D2E99 /* Banish.app */,
+				A08EB2A32D182BE3005D2E99 /* BanishTests.xctest */,
+				A08EB2AD2D182BE3005D2E99 /* BanishUITests.xctest */,
 				A08EB2E52D184AD1005D2E99 /* ContentBlockerExtension.appex */,
 			);
 			name = Products;
@@ -181,7 +181,7 @@
 				A08EB2FC2D184AD1005D2E99 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A08EB2952D182BDF005D2E99 /* abless */,
+				A08EB2952D182BDF005D2E99 /* Banish */,
 			);
 			name = Banish;
 			packageProductDependencies = (
@@ -204,7 +204,7 @@
 				A08EB2A52D182BE3005D2E99 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A08EB2A62D182BE3005D2E99 /* ablessTests */,
+				A08EB2A62D182BE3005D2E99 /* BanishTests */,
 			);
 			name = ablessTests;
 			packageProductDependencies = (
@@ -227,7 +227,7 @@
 				A08EB2AF2D182BE3005D2E99 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A08EB2B02D182BE3005D2E99 /* ablessUITests */,
+				A08EB2B02D182BE3005D2E99 /* BanishUITests */,
 			);
 			name = ablessUITests;
 			packageProductDependencies = (
