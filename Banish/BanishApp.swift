@@ -22,9 +22,9 @@ struct BanishApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // Request notification permissions (local notifications only)
+        // Request basic notification permissions
         UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if granted {
                 print("Notification permission granted")
             }
@@ -55,17 +55,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func handleAppRefresh(task: BGAppRefreshTask) {
-        // Schedule the next refresh
         scheduleAppRefresh()
         
-        // Create a task to check for conflicting apps
         let detector = AppDetector()
         if detector.hasConflictingApps() {
-            // Send local notification
             let content = UNMutableNotificationContent()
             content.title = "Conflicting App Detected"
             content.body = "YouTube or other conflicting apps have been installed. Please open Banish to maintain your distraction-free browsing."
-            content.sound = .default
             
             let request = UNNotificationRequest(
                 identifier: UUID().uuidString,
@@ -83,7 +79,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                               willPresent notification: UNNotification,
                               withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.banner, .sound])
+        completionHandler([.banner])
     }
     
     // Handle notification tap
