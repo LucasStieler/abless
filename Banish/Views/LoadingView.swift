@@ -3,7 +3,6 @@ import SwiftUI
 struct LoadingView: View {
     @State private var opacity = 0.0
     @State private var scale = 0.8
-    @State private var showMainContent = false
     @State private var textOpacity = 1.0
     @State private var textOffset: CGFloat = 0
     
@@ -35,7 +34,9 @@ struct LoadingView: View {
                         .multilineTextAlignment(.center)
                 }
             }
-            .padding(.top, 160)
+            .padding(.top, 120)
+            
+            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
@@ -53,7 +54,7 @@ struct LoadingView: View {
                 scale = 1
             }
             
-            // Text fade out
+            // Text fade out and scale up
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 withAnimation(.easeInOut(duration: 0.5)) {
                     textOpacity = 0

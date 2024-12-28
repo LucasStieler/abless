@@ -22,7 +22,12 @@ struct ContentView: View {
             Group {
                 if isLoading {
                     LoadingView()
-                        .transition(.opacity.combined(with: .scale(scale: 1.1)))
+                        .transition(
+                            .asymmetric(
+                                insertion: .opacity,
+                                removal: .opacity.combined(with: .scale(scale: 1.1))
+                            )
+                        )
                 } else {
                     VStack {
                         switch currentStep {
@@ -89,7 +94,7 @@ struct ContentView: View {
                                 ))
                         }
                     }
-                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStep)
+                    .transition(.opacity.combined(with: .scale(scale: 0.95)))
                 }
             }
             .opacity(opacity)
@@ -134,7 +139,7 @@ struct ContentView: View {
                 
                 // Delay removing loading screen
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    withAnimation(.easeInOut(duration: 0.5)) {
+                    withAnimation(.easeInOut(duration: 0.6)) {
                         isLoading = false
                     }
                 }
