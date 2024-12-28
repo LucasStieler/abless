@@ -39,7 +39,7 @@ struct ContentView: View {
                                         removal: .move(edge: .leading).combined(with: .opacity)
                                     ))
                             } else {
-                                HowItWorksView(currentStep: $currentStep)
+                                HowItWorksView(currentStep: $currentStep, isSetupComplete: true)
                                     .transition(.asymmetric(
                                         insertion: .move(edge: .trailing).combined(with: .opacity),
                                         removal: .move(edge: .leading).combined(with: .opacity)
@@ -75,13 +75,13 @@ struct ContentView: View {
                                     setupNeeded = false
                                 }
                         case 5:
-                            HowItWorksView(currentStep: $currentStep)
+                            HowItWorksView(currentStep: $currentStep, isSetupComplete: false)
                                 .transition(.asymmetric(
                                     insertion: .move(edge: .trailing).combined(with: .opacity),
                                     removal: .move(edge: .leading).combined(with: .opacity)
                                 ))
                         default:
-                            HowItWorksView(currentStep: $currentStep)
+                            HowItWorksView(currentStep: $currentStep, isSetupComplete: true)
                                 .transition(.asymmetric(
                                     insertion: .move(edge: .trailing).combined(with: .opacity),
                                     removal: .move(edge: .leading).combined(with: .opacity)

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HowItWorksView: View {
     @Binding var currentStep: Int
+    var isSetupComplete: Bool
     
     let steps = [
         (icon: "exclamationmark.triangle.fill", title: "App Detection", description: "Banish checks for apps with distracting short videos like YouTube, Instagram, and TikTok."),
@@ -79,31 +80,22 @@ struct HowItWorksView: View {
             Spacer()
             
             // Bottom button
-            Button(action: {
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+            if isSetupComplete {
+                Button("Close App") {
+                    exit(0)
+                }
+                .buttonStyle(PrimaryButtonStyle())
+            } else {
+                Button("Start Browsing") {
                     currentStep += 1
                 }
-            }) {
-                Text("Start Browsing")
-                    .font(.system(size: 17, weight: .semibold))
-                    .frame(width: 280, height: 50)
-                    .background(
-                        LinearGradient(
-                            colors: [.green, .mint],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
+                .buttonStyle(PrimaryButtonStyle())
             }
-            .buttonStyle(.plain)
-            .padding(.bottom, 16)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 #Preview {
-    HowItWorksView(currentStep: .constant(2))
+    HowItWorksView(currentStep: .constant(2), isSetupComplete: true)
 } 
