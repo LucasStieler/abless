@@ -96,6 +96,12 @@ struct HowItWorksView: View {
     }
 }
 
+extension View {
+    func primaryButtonStyle() -> some View {
+        self.buttonStyle(PrimaryButtonStyle())
+    }
+}
+
 #Preview {
     HowItWorksView(currentStep: .constant(2), isSetupComplete: true)
 } 
