@@ -74,9 +74,13 @@ struct ContentView: View {
                                         insertion: .move(edge: .trailing).combined(with: .opacity),
                                         removal: .move(edge: .leading).combined(with: .opacity)
                                     ))
+                                    .onAppear {
+                                        // Reset setupNeeded after completing setup
+                                        setupNeeded = false
+                                    }
                             }
                         default:
-                            WelcomeView(currentStep: $currentStep)
+                            HowItWorksView(currentStep: $currentStep)
                                 .transition(.asymmetric(
                                     insertion: .move(edge: .trailing).combined(with: .opacity),
                                     removal: .move(edge: .leading).combined(with: .opacity)
