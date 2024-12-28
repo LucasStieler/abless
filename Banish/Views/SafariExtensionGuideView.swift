@@ -7,6 +7,8 @@ struct SafariExtensionGuideView: View {
     @Binding var currentStep: Int
     @StateObject private var appState = AppState()
     @State private var showingAlert = false
+    @State private var extensionEnabled = false
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         VStack(spacing: 24) {
@@ -73,6 +75,18 @@ struct SafariExtensionGuideView: View {
         } message: {
             Text("Please enable the Safari extension in Settings before continuing.")
         }
+        .onAppear {
+            checkExtensionStatus()
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .active {
+                checkExtensionStatus()
+            }
+        }
+        // Add periodic check while view is visible
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            checkExtensionStatus()
+        }
     }
     
     private func checkExtensionAndContinue() {
@@ -95,6 +109,23 @@ struct SafariExtensionGuideView: View {
                     }
                 } else {
                     showingAlert = true
+                }
+            }
+        }
+    }
+    
+    private func checkExtensionStatus() {
+        SFContentBlockerManager.getStateOfContentBlocker(
+            withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
+            DispatchQueue.main.async {
+                let newStatus = state?.isEnabled ?? false
+                if newStatus != extensionEnabled {
+                    withAnimation {
+                        extensionEnabled = newStatus
+                        if extensionEnabled {
+                            currentStep += 1
+                        }
+                    }
                 }
             }
         }

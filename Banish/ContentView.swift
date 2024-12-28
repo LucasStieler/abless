@@ -17,13 +17,8 @@ struct ContentView: View {
     @State private var errorMessage = ""
     
     var body: some View {
-        Group {
-            if appState.setupCompleted {
-                SuccessView()
-                    .onAppear {
-                        checkSetupStatus()
-                    }
-            } else {
+        NavigationView {
+            VStack {
                 switch currentStep {
                 case 1:
                     WelcomeView(currentStep: $currentStep)
@@ -49,6 +44,7 @@ struct ContentView: View {
                 }
             }
         }
+        .preferredColorScheme(.light) // Force light mode
     }
     
     private func checkSetupStatus() {

@@ -4,6 +4,7 @@ import UIKit
 struct AppDetectionView: View {
     @Binding var currentStep: Int
     @State private var installedApps: [String] = []
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         VStack(spacing: 24) {
@@ -12,12 +13,17 @@ struct AppDetectionView: View {
                 .font(.system(size: 60))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.red, .orange],
+                        colors: installedApps.isEmpty ? 
+                            [.green, .mint] : // No conflicting apps - green gradient
+                            [.red, .orange],  // Conflicting apps found - orange gradient
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
                 )
-                .shadow(color: .red.opacity(0.3), radius: 10, x: 0, y: 5)
+                .shadow(color: installedApps.isEmpty ? 
+                    .green.opacity(0.3) : 
+                    .red.opacity(0.3), 
+                       radius: 10, x: 0, y: 5)
                 .padding(.bottom, 8)
             
             if installedApps.isEmpty {
@@ -73,10 +79,24 @@ struct AppDetectionView: View {
         .onAppear {
             checkInstalledApps()
         }
+        .onChange(of: scenePhase) { phase in
+            if phase == .active {
+                checkInstalledApps()
+            }
+        }
+        // Add periodic check while view is visible
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            checkInstalledApps()
+        }
     }
     
     private func checkInstalledApps() {
         let detector = AppDetector()
-        installedApps = detector.getInstalledApps()
+        let newApps = detector.getInstalledApps()
+        if newApps != installedApps {
+            withAnimation {
+                installedApps = newApps
+            }
+        }
     }
 } 
