@@ -97,6 +97,7 @@ struct ContentView: View {
                     .transition(.opacity.combined(with: .scale(scale: 0.95)))
                 }
             }
+            .animation(.easeInOut(duration: 0.6), value: isLoading)
             .opacity(opacity)
         }
         .preferredColorScheme(.light)
