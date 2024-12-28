@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var currentStep = 1
     @State private var hasConflictingApps = false
     @State private var extensionEnabled = false
+    @State private var setupNeeded = false
     
     var body: some View {
         NavigationView {
@@ -25,17 +26,33 @@ struct ContentView: View {
                             removal: .move(edge: .leading).combined(with: .opacity)
                         ))
                 case 2:
-                    AppDetectionView(currentStep: $currentStep)
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .trailing).combined(with: .opacity),
-                            removal: .move(edge: .leading).combined(with: .opacity)
-                        ))
+                    if setupNeeded {
+                        AppDetectionView(currentStep: $currentStep)
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
+                    } else {
+                        HowItWorksView(currentStep: $currentStep)
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
+                    }
                 case 3:
-                    SafariExtensionGuideView(currentStep: $currentStep)
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .trailing).combined(with: .opacity),
-                            removal: .move(edge: .leading).combined(with: .opacity)
-                        ))
+                    if setupNeeded {
+                        SafariExtensionGuideView(currentStep: $currentStep)
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
+                    } else {
+                        SuccessView()
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
+                    }
                 case 4:
                     SafariLoginView(currentStep: $currentStep)
                         .transition(.asymmetric(
@@ -68,19 +85,19 @@ struct ContentView: View {
     }
     
     private func checkInitialState() {
-        // Check for conflicting apps
         let detector = AppDetector()
-        if detector.hasConflictingApps() {
-            currentStep = 2
-            appState.resetSetup()
-            return
-        }
+        let hasApps = detector.hasConflictingApps()
         
-        // Check Safari extension status
         SFContentBlockerManager.getStateOfContentBlocker(
             withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
             DispatchQueue.main.async {
-                if let isEnabled = state?.isEnabled, !isEnabled {
+                let extensionDisabled = !(state?.isEnabled ?? false)
+                setupNeeded = hasApps || extensionDisabled
+                
+                if hasApps {
+                    currentStep = 2
+                    appState.resetSetup()
+                } else if extensionDisabled {
                     currentStep = 3
                     appState.resetSetup()
                 }
