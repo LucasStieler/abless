@@ -5,7 +5,8 @@ struct SafariLoginView: View {
     /// Binding to track the current step in the setup process
     @Binding var currentStep: Int
     let isSetupComplete: Bool
-    @State private var opacity: CGFloat = 1.0 // For fade out animation
+    @State private var opacity: CGFloat = 1.0
+    @State private var scale: CGFloat = 1.0
     
     /// Array of tuples containing platform names and their URLs
     private let platforms = [
@@ -70,13 +71,9 @@ struct SafariLoginView: View {
             // Bottom button
             Button(action: {
                 if isSetupComplete {
-                    // Animate fade out
-                    withAnimation(.easeOut(duration: 0.5)) {
+                    withAnimation(.easeInOut(duration: 0.5)) {
                         opacity = 0
-                    }
-                    // Delay exit to allow animation to complete
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        exit(0)
+                        scale = 0.95
                     }
                 } else {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
@@ -101,7 +98,13 @@ struct SafariLoginView: View {
             .padding(.bottom, 16)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .opacity(opacity) // Apply fade out animation
+        .smoothExit(opacity: $opacity, scale: $scale) {
+            exit(0)
+        }
+        .transition(.asymmetric(
+            insertion: .move(edge: .trailing).combined(with: .opacity),
+            removal: .move(edge: .leading).combined(with: .opacity)
+        ))
     }
 }
 

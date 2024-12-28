@@ -3,6 +3,8 @@ import SwiftUI
 struct HowItWorksView: View {
     @Binding var currentStep: Int
     var isSetupComplete: Bool
+    @State private var opacity: CGFloat = 1
+    @State private var scale: CGFloat = 1
     
     let steps = [
         (icon: "exclamationmark.triangle.fill", title: "App Detection", description: "Banish checks for apps with distracting short videos like YouTube, Instagram, and TikTok."),
@@ -82,17 +84,29 @@ struct HowItWorksView: View {
             // Bottom button
             if isSetupComplete {
                 Button("Start Browsing") {
-                    currentStep += 1
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                        currentStep += 1
+                    }
                 }
                 .buttonStyle(SubtleButtonStyle())
             } else {
                 Button("Close App") {
-                    exit(0)
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        opacity = 0
+                        scale = 0.95
+                    }
                 }
                 .buttonStyle(PrimaryButtonStyle())
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .smoothExit(opacity: $opacity, scale: $scale) {
+            exit(0)
+        }
+        .transition(.asymmetric(
+            insertion: .move(edge: .trailing).combined(with: .opacity),
+            removal: .move(edge: .leading).combined(with: .opacity)
+        ))
     }
 }
 
