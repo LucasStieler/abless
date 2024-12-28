@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var extensionEnabled = false
     @State private var setupNeeded = false
     @State private var isLoading = true
-    @State private var opacity: CGFloat = 0 // For fade transitions
+    @State private var opacity: CGFloat = 0
     
     var body: some View {
         NavigationView {
@@ -75,17 +75,6 @@ struct ContentView: View {
                                         removal: .move(edge: .leading).combined(with: .opacity)
                                     ))
                             }
-                        case 5:
-                            if setupNeeded {
-                                SuccessView()
-                                    .transition(.asymmetric(
-                                        insertion: .move(edge: .trailing).combined(with: .opacity),
-                                        removal: .move(edge: .leading).combined(with: .opacity)
-                                    ))
-                                    .onAppear {
-                                        appState.completeSetup()
-                                    }
-                            }
                         default:
                             WelcomeView(currentStep: $currentStep)
                                 .transition(.asymmetric(
@@ -102,7 +91,6 @@ struct ContentView: View {
         }
         .preferredColorScheme(.light)
         .onAppear {
-            // Fade in the loading view
             withAnimation(.easeIn(duration: 0.3)) {
                 opacity = 1
             }
@@ -111,34 +99,20 @@ struct ContentView: View {
     }
     
     private func checkInitialState() {
-        print("\n--- Starting Initial State Check ---")
-        
-        // First check for conflicting apps
         let detector = AppDetector()
         hasConflictingApps = detector.hasConflictingApps()
-        print("Initial check - Conflicting apps detected: \(hasConflictingApps)")
         
-        // Then check Safari extension status
         SFContentBlockerManager.getStateOfContentBlocker(
             withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
             DispatchQueue.main.async {
                 extensionEnabled = state?.isEnabled ?? false
-                print("Initial check - Extension enabled: \(extensionEnabled)")
-                
-                // If we have conflicting apps OR extension is disabled, we need setup
                 setupNeeded = hasConflictingApps || !extensionEnabled
                 
                 if setupNeeded {
-                    // Reset to beginning of setup flow
                     currentStep = 1
                     appState.resetSetup()
-                    print("Initial check - Setup needed, starting setup flow")
-                } else {
-                    // Everything is good, show How It Works
-                    print("Initial check - No setup needed, showing How It Works")
                 }
                 
-                // Delay removing loading screen
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     withAnimation(.easeInOut(duration: 0.6)) {
                         isLoading = false

@@ -10,7 +10,6 @@
 		<string>com.google.ios.youtube</string>
 		<string>goog.youtube</string>
 		<string>youtube-x-callback</string>
-		<string>youtubeapp</string>
 		<string>instagram</string>
 		<string>instagram-stories</string>
 		<string>tiktok</string>
@@ -23,14 +22,6 @@
 		<key>UISceneConfigurations</key>
 		<dict/>
 	</dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-	</array>
-	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<array>
-		<string>io.banish.app.refresh</string>
-	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>
