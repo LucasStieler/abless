@@ -1,11 +1,119 @@
 [
-  {
-    "action": {
-      "type": "block"
+    // YouTube Shorts
+    {
+        "trigger": {
+            "url-filter": ".*youtube\\.com/shorts.*",
+            "url-filter-is-case-sensitive": false
+        },
+        "action": {
+            "type": "block"
+        }
     },
-    "trigger": {
-      "url-filter": ".*",
-      "if-domain": ["*youtube.com", "*instagram.com", "*tiktok.com"]
+    {
+        "trigger": {
+            "url-filter": ".*youtube\\.com.*",
+            "url-filter-is-case-sensitive": false,
+            "if-domain": ["*youtube.com"]
+        },
+        "action": {
+            "type": "css-display-none",
+            "selector": [
+                "ytd-reel-shelf-renderer",
+                "ytd-rich-shelf-renderer[is-shorts]",
+                "ytd-mini-guide-entry-renderer[aria-label*='Shorts']",
+                "ytd-guide-entry-renderer[aria-label*='Shorts']",
+                "ytd-reel-video-renderer",
+                "ytd-shorts",
+                "[aria-label*='Shorts']",
+                "[href*='/shorts']",
+                "ytd-rich-grid-row[is-shorts]"
+            ]
+        }
+    },
+    // Instagram Reels
+    {
+        "trigger": {
+            "url-filter": ".*instagram\\.com/reels.*",
+            "url-filter-is-case-sensitive": false
+        },
+        "action": {
+            "type": "block"
+        }
+    },
+    {
+        "trigger": {
+            "url-filter": ".*instagram\\.com.*",
+            "url-filter-is-case-sensitive": false,
+            "if-domain": ["*instagram.com"]
+        },
+        "action": {
+            "type": "css-display-none",
+            "selector": [
+                "[href*='/reels']",
+                "[role='tablist'] a[href='/reels']",
+                "div[role='menuitem'][href*='/reels']",
+                "._aabd._aa8k._aanf",
+                "a.x1i10hfl[href*='reels']",
+                "div[role='tablist'] a[href*='reels']",
+                "div[data-media-type='Reels']",
+                "div[data-visualcompletion='loading-state'][style*='reels']"
+            ]
+        }
+    },
+    // TikTok
+    {
+        "trigger": {
+            "url-filter": ".*tiktok\\.com/@.*",
+            "url-filter-is-case-sensitive": false
+        },
+        "action": {
+            "type": "block"
+        }
+    },
+    {
+        "trigger": {
+            "url-filter": ".*tiktok\\.com.*",
+            "url-filter-is-case-sensitive": false,
+            "if-domain": ["*tiktok.com"]
+        },
+        "action": {
+            "type": "css-display-none",
+            "selector": [
+                "div[data-e2e='recommend-list-item-container']",
+                "div[data-e2e='feed-item']",
+                "div[data-e2e='user-post-item']",
+                "div[class*='DivItemContainer']",
+                "[class*='feed-item']",
+                "[data-e2e*='video']"
+            ]
+        }
+    },
+    // Block API endpoints
+    {
+        "trigger": {
+            "url-filter": ".*(youtube\\.com/youtubei/v1/browse|youtube\\.com/youtubei/v1/next).*",
+            "resource-type": ["xmlhttprequest"]
+        },
+        "action": {
+            "type": "block"
+        }
+    },
+    {
+        "trigger": {
+            "url-filter": ".*(instagram\\.com/api/v1/clips|instagram\\.com/api/v1/reels).*",
+            "resource-type": ["xmlhttprequest"]
+        },
+        "action": {
+            "type": "block"
+        }
+    },
+    {
+        "trigger": {
+            "url-filter": ".*tiktok\\.com/api/recommend.*",
+            "resource-type": ["xmlhttprequest"]
+        },
+        "action": {
+            "type": "block"
+        }
     }
-  }
 ] 
