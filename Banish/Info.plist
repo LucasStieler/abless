@@ -10,10 +10,17 @@
 		<string>com.google.ios.youtube</string>
 		<string>goog.youtube</string>
 		<string>youtube-x-callback</string>
+		<string>youtubeapp</string>
+		<string>googleyoutube</string>
+		<string>youtube.com</string>
 		<string>instagram</string>
 		<string>instagram-stories</string>
 		<string>tiktok</string>
 		<string>snssdk1233</string>
+		<string>tiktokv</string>
+		<string>tiktok.com</string>
+		<string>musically</string>
+		<string>musical.ly</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

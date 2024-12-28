@@ -123,15 +123,6 @@ struct ContentView: View {
     }
 }
 
-func reloadContentBlocker() {
-    SFContentBlockerManager.reloadContentBlocker(
-        withIdentifier: "io.banish.app.ContentBlockerExtension") { error in
-        if let error = error {
-            print("Error reloading content blocker: \(error)")
-        }
-    }
-}
-
 #Preview {
     ContentView()
 }

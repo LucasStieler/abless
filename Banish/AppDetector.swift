@@ -1,7 +1,6 @@
 import UIKit
 
 class AppDetector {
-    // Define a fixed order for display
     private let appOrder = ["YouTube", "Instagram", "TikTok"]
     
     public let appSchemes = [
@@ -12,7 +11,9 @@ class AppDetector {
             "com.google.ios.youtube://",
             "goog.youtube://",
             "youtube-x-callback://",
-            "youtubeapp://"
+            "youtubeapp://",
+            "googleyoutube://",
+            "youtube.com://"
         ],
         "instagram": [
             "instagram://",
@@ -20,32 +21,48 @@ class AppDetector {
         ],
         "tiktok": [
             "tiktok://",
-            "snssdk1233://"
+            "snssdk1233://",
+            "tiktokv://",
+            "tiktok.com://",
+            "musically://",
+            "musical.ly://"
         ]
     ]
     
     private var cachedResults: [String] = []
     private var lastCheckTime: Date = .distantPast
-    private let cacheTimeout: TimeInterval = 1.0 // 1 second cache
+    private let cacheTimeout: TimeInterval = 1.0
     
     public func getInstalledApps() -> [String] {
-        print("Checking for installed apps...") // Debug print
-        
-        // Return cached results if recent
         if Date().timeIntervalSince(lastCheckTime) < cacheTimeout {
-            print("Returning cached results: \(cachedResults)") // Debug print
             return cachedResults
         }
         
         var foundApps: Set<String> = []
         
+        let bundleIDs = [
+            "com.google.ios.youtube",
+            "com.zhiliaoapp.musically",
+            "com.burbn.instagram"
+        ]
+        
+        for bundleID in bundleIDs {
+            if let url = URL(string: "\(bundleID)://"),
+               UIApplication.shared.canOpenURL(url) {
+                switch bundleID {
+                case "com.google.ios.youtube": foundApps.insert("YouTube")
+                case "com.zhiliaoapp.musically": foundApps.insert("TikTok")
+                case "com.burbn.instagram": foundApps.insert("Instagram")
+                default: break
+                }
+            }
+        }
+        
         for (app, schemes) in appSchemes {
-            print("Checking \(app)...") // Debug print
-            for scheme in schemes {
-                if let url = URL(string: scheme) {
-                    let canOpen = UIApplication.shared.canOpenURL(url)
-                    print("Scheme \(scheme): \(canOpen ? "can open" : "cannot open")") // Debug print
-                    if canOpen {
+            if !foundApps.contains(app.capitalized) {
+                for scheme in schemes {
+                    if let url = URL(string: scheme),
+                       UIApplication.shared.canOpenURL(url) {
                         foundApps.insert(app.capitalized)
                         break
                     }
@@ -54,17 +71,13 @@ class AppDetector {
         }
         
         let installedApps = appOrder.filter { foundApps.contains($0) }
-        print("Found installed apps: \(installedApps)") // Debug print
         
-        // Update cache
         cachedResults = installedApps
         lastCheckTime = Date()
         return installedApps
     }
     
     public func hasConflictingApps() -> Bool {
-        let apps = getInstalledApps()
-        print("hasConflictingApps check: \(apps.isEmpty ? "no apps" : "has apps: \(apps)")") // Debug print
-        return !apps.isEmpty
+        return !getInstalledApps().isEmpty
     }
 } 
