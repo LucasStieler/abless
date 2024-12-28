@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 struct AppDetectionView: View {
     @Binding var currentStep: Int
@@ -14,26 +13,30 @@ struct AppDetectionView: View {
                 .foregroundStyle(
                     LinearGradient(
                         colors: installedApps.isEmpty ? 
-                            [.green, .mint] : // No conflicting apps - green gradient
-                            [.red, .orange],  // Conflicting apps found - orange gradient
+                            [.green, .mint] :
+                            [.red, .orange],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
                 )
+                .frame(minWidth: 44, minHeight: 44)
                 .shadow(color: installedApps.isEmpty ? 
                     .green.opacity(0.3) : 
-                    .red.opacity(0.3), 
+                    .red.opacity(0.3),
                        radius: 10, x: 0, y: 5)
                 .padding(.bottom, 8)
             
             if installedApps.isEmpty {
-                // Success state - no apps found
+                // Success state
                 Text("No Conflicting Apps Found")
-                    .font(.title2)
-                    .bold()
+                    .font(.system(size: 28, weight: .bold))
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.primary)
                 
                 Text("You're ready to continue!")
+                    .font(.system(size: 17))
                     .foregroundColor(.secondary)
+                    .padding(.top, 4)
                 
                 Button(action: {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
@@ -41,8 +44,9 @@ struct AppDetectionView: View {
                     }
                 }) {
                     Text("Continue")
+                        .font(.system(size: 17, weight: .semibold))
+                        .frame(height: 50)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
                         .background(
                             LinearGradient(
                                 colors: [.blue, .purple],
@@ -51,31 +55,41 @@ struct AppDetectionView: View {
                             )
                         )
                         .foregroundColor(.white)
-                        .cornerRadius(16)
-                        .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
+                        .cornerRadius(12)
                 }
                 .buttonStyle(.plain)
+                .padding(.horizontal, 24)
+                .frame(maxWidth: 500)
             } else {
+                // Warning state
                 Text("Please uninstall the following apps:")
-                    .font(.headline)
+                    .font(.system(size: 22, weight: .bold))
+                    .multilineTextAlignment(.center)
                     .padding(.bottom, 8)
                 
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 16) {
                     ForEach(installedApps, id: \.self) { app in
-                        HStack {
+                        HStack(spacing: 12) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.red)
+                                .font(.system(size: 22))
                             Text(app)
+                                .font(.system(size: 17))
                                 .foregroundColor(.primary)
                         }
+                        .frame(minHeight: 44)
                     }
                 }
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(12)
+                .padding(16)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(.systemGray6))
+                )
+                .padding(.horizontal, 24)
             }
         }
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.vertical, 20)
         .onAppear {
             checkInstalledApps()
         }
@@ -84,7 +98,6 @@ struct AppDetectionView: View {
                 checkInstalledApps()
             }
         }
-        // Add periodic check while view is visible
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             checkInstalledApps()
         }
@@ -99,4 +112,8 @@ struct AppDetectionView: View {
             }
         }
     }
+}
+
+#Preview {
+    AppDetectionView(currentStep: .constant(2))
 } 

@@ -44,7 +44,7 @@ struct ContentView: View {
                 }
             }
         }
-        .preferredColorScheme(.light) // Force light mode
+        .preferredColorScheme(.light)
     }
     
     private func checkSetupStatus() {
@@ -114,66 +114,6 @@ struct ContentView: View {
             if let error = error {
                 print("Extension error: \(error)")
             }
-        }
-    }
-}
-
-struct WelcomeView: View {
-    @Binding var currentStep: Int
-    
-    var body: some View {
-        VStack(spacing: 24) {
-            // Animated gradient icon
-            Image(systemName: "shield.slash.fill")
-                .font(.system(size: 70))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [.blue, .purple],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .padding(.bottom, 8)
-                .shadow(color: .blue.opacity(0.3), radius: 10, x: 0, y: 5)
-            
-            Text("Welcome to Banish")
-                .font(.title)
-                .bold()
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [.primary, .primary.opacity(0.7)],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
-            
-            Text("This app helps you block distracting short videos like YouTube Shorts, Instagram Reels, and TikTok videos.")
-                .multilineTextAlignment(.center)
-                .font(.body)
-                .foregroundColor(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 8)
-            
-            Button(action: {
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                    currentStep += 1
-                }
-            }) {
-                Text("Continue")
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(
-                        LinearGradient(
-                            colors: [.blue, .purple],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .foregroundColor(.white)
-                    .cornerRadius(16)
-                    .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
-            }
-            .buttonStyle(.plain)
         }
     }
 }

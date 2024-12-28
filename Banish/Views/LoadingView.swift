@@ -4,8 +4,6 @@ struct LoadingView: View {
     @State private var opacity = 0.0
     @State private var scale = 0.8
     @State private var showMainContent = false
-    
-    // Text animation states
     @State private var textOpacity = 1.0
     @State private var textOffset: CGFloat = 0
     
@@ -24,35 +22,38 @@ struct LoadingView: View {
                     )
                     .ignoresSafeArea()
                     
-                    VStack(spacing: 30) {
-                        // App icon or logo
+                    VStack(spacing: 32) {
+                        // App icon with minimum touch target
                         Image(systemName: "shield.fill")
                             .font(.system(size: 80))
                             .foregroundColor(.white)
                             .opacity(opacity)
                             .scaleEffect(scale)
+                            .frame(minWidth: 44, minHeight: 44)
                         
-                        // App name
-                        Text("Banish")
-                            .font(.largeTitle)
-                            .bold()
-                            .foregroundColor(.white)
-                            .opacity(opacity)
-                        
-                        // Tagline
-                        Text("Let distracting short videos vanish")
-                            .font(.title3)
-                            .foregroundColor(.white.opacity(0.9))
-                            .opacity(textOpacity)
-                            .offset(x: textOffset)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                        VStack(spacing: 16) {
+                            // App name
+                            Text("Banish")
+                                .font(.system(size: 34, weight: .bold))
+                                .foregroundColor(.white)
+                                .opacity(opacity)
+                            
+                            // Tagline with proper text size
+                            Text("Let distracting short videos vanish")
+                                .font(.system(size: 17))
+                                .foregroundColor(.white.opacity(0.9))
+                                .opacity(textOpacity)
+                                .offset(x: textOffset)
+                                .multilineTextAlignment(.center)
+                        }
+                        .padding(.horizontal, 24)
+                        .frame(maxWidth: 500)
                     }
                 }
             }
         }
         .onAppear {
-            // Initial animation for icon and app name
+            // Initial animation
             withAnimation(.easeOut(duration: 0.8)) {
                 opacity = 1
                 scale = 1
@@ -75,4 +76,8 @@ struct LoadingView: View {
             }
         }
     }
+}
+
+#Preview {
+    LoadingView()
 } 

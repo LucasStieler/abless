@@ -12,7 +12,7 @@ struct SafariExtensionGuideView: View {
     
     var body: some View {
         VStack(spacing: 24) {
-            // Safari icon with gradient styling
+            // Safari icon with gradient
             Image(systemName: "safari.fill")
                 .font(.system(size: 60))
                 .foregroundStyle(
@@ -22,41 +22,37 @@ struct SafariExtensionGuideView: View {
                         endPoint: .bottomTrailing
                     )
                 )
+                .frame(minWidth: 44, minHeight: 44)
                 .shadow(color: .blue.opacity(0.3), radius: 10, x: 0, y: 5)
                 .padding(.bottom, 8)
             
             // Title section
             Text("Enable Safari Extension")
-                .font(.title2)
-                .bold()
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [.primary, .primary.opacity(0.7)],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
+                .font(.system(size: 28, weight: .bold))
+                .multilineTextAlignment(.center)
+                .foregroundColor(.primary)
             
-            // Steps container with numbered instructions
-            VStack(alignment: .leading, spacing: 16) {
+            // Steps container
+            VStack(alignment: .leading, spacing: 20) {
                 StepRow(number: 1, text: "Open the Settings app")
                 StepRow(number: 2, text: "Navigate to Safari → Extensions")
                 StepRow(number: 3, text: "Enable Banish")
             }
-            .padding()
+            .padding(20)
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color(.systemGray6))
-                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
             )
+            .padding(.horizontal, 24)
             
-            // Continue button with gradient styling
+            // Continue button
             Button(action: {
                 checkExtensionAndContinue()
             }) {
                 Text("Continue")
+                    .font(.system(size: 17, weight: .semibold))
+                    .frame(height: 50)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
                     .background(
                         LinearGradient(
                             colors: [.blue, .purple],
@@ -65,11 +61,14 @@ struct SafariExtensionGuideView: View {
                         )
                     )
                     .foregroundColor(.white)
-                    .cornerRadius(16)
-                    .shadow(color: .blue.opacity(0.3), radius: 8, x: 0, y: 4)
+                    .cornerRadius(12)
             }
             .buttonStyle(.plain)
+            .padding(.horizontal, 24)
+            .frame(maxWidth: 500)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.vertical, 20)
         .alert("Extension Not Enabled", isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         } message: {
@@ -83,7 +82,6 @@ struct SafariExtensionGuideView: View {
                 checkExtensionStatus()
             }
         }
-        // Add periodic check while view is visible
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
             checkExtensionStatus()
         }
@@ -140,8 +138,8 @@ struct StepRow: View {
     let text: String
     
     var body: some View {
-        HStack(spacing: 12) {
-            // Circular number indicator
+        HStack(spacing: 16) {
+            // Number indicator
             ZStack {
                 Circle()
                     .fill(
@@ -151,14 +149,21 @@ struct StepRow: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                    .frame(width: 28, height: 28)
+                    .frame(width: 32, height: 32)
                 Text("\(number)")
+                    .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(.white)
-                    .font(.headline)
             }
-            // Step instruction text
+            
+            // Step text
             Text(text)
-                .font(.body)
+                .font(.system(size: 17))
+                .foregroundColor(.primary)
         }
+        .frame(minHeight: 44)
     }
+}
+
+#Preview {
+    SafariExtensionGuideView(currentStep: .constant(3))
 } 
