@@ -89,7 +89,7 @@ struct HowItWorksView: View {
                 Button("Start Browsing") {
                     currentStep += 1
                 }
-                .buttonStyle(PrimaryButtonStyle())
+                .buttonStyle(SubtleButtonStyle())
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
