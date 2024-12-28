@@ -15,24 +15,26 @@ struct WelcomeView: View {
                         endPoint: .bottomTrailing
                     )
                 )
-                .frame(minWidth: 44, minHeight: 44) // Minimum touch target
+                .frame(minWidth: 44, minHeight: 44)
                 .padding(.bottom, 8)
                 .shadow(color: .blue.opacity(0.3), radius: 10, x: 0, y: 5)
             
             // Title with proper text size and contrast
             Text("Welcome to Banish")
-                .font(.system(size: 28, weight: .bold)) // Large, readable text
-                .foregroundStyle(Color.primary) // High contrast
+                .font(.system(size: 28, weight: .bold))
+                .foregroundStyle(Color.primary)
                 .multilineTextAlignment(.center)
             
             // Description with minimum 11pt text
             Text("This app helps you block distracting short videos like YouTube Shorts, Instagram Reels, and TikTok videos.")
-                .font(.system(size: 17)) // Body text size
+                .font(.system(size: 17))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 24) // Proper margins
-                .lineSpacing(4) // Improved readability
+                .padding(.horizontal)
+                .lineSpacing(4)
+            
+            Spacer()
             
             // Continue button with proper sizing and spacing
             Button(action: {
@@ -42,8 +44,8 @@ struct WelcomeView: View {
             }) {
                 Text("Continue")
                     .font(.system(size: 17, weight: .semibold))
-                    .frame(height: 50) // Comfortable touch target
-                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .frame(width: 280) // Standard button width
                     .background(
                         LinearGradient(
                             colors: [.blue, .purple],
@@ -55,11 +57,10 @@ struct WelcomeView: View {
                     .cornerRadius(12)
             }
             .buttonStyle(.plain)
-            .padding(.horizontal, 24) // Standard side margins
-            .frame(maxWidth: 500) // Maximum width for larger devices
+            .padding(.bottom, 16) // Safe area padding
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill available space
-        .padding(.vertical, 20) // Vertical padding
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.top, 60) // Top padding for visual balance
     }
 }
 
