@@ -98,38 +98,39 @@ struct ContentView: View {
     }
     
     private func checkInitialState() {
-        print("\n--- Starting Initial State Check ---") // Debug print
+        print("\n--- Starting Initial State Check ---")
         
         // First check for conflicting apps
         let detector = AppDetector()
         hasConflictingApps = detector.hasConflictingApps()
-        print("Initial check - Conflicting apps detected: \(hasConflictingApps)") // Debug print
+        print("Initial check - Conflicting apps detected: \(hasConflictingApps)")
         
         // Then check Safari extension status
         SFContentBlockerManager.getStateOfContentBlocker(
             withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
             DispatchQueue.main.async {
                 extensionEnabled = state?.isEnabled ?? false
-                print("Initial check - Extension enabled: \(extensionEnabled)") // Debug print
+                print("Initial check - Extension enabled: \(extensionEnabled)")
                 
-                // Set setup needed if either condition is true
+                // If we have conflicting apps OR extension is disabled, we need setup
                 setupNeeded = hasConflictingApps || !extensionEnabled
-                print("Initial check - Setup needed: \(setupNeeded)") // Debug print
                 
-                // Always start at step 1 if setup is needed
                 if setupNeeded {
-                    print("Initial check - Resetting to setup flow") // Debug print
+                    // Reset to beginning of setup flow
                     currentStep = 1
                     appState.resetSetup()
+                    print("Initial check - Setup needed, starting setup flow")
+                } else {
+                    // Everything is good, show How It Works
+                    print("Initial check - No setup needed, showing How It Works")
                 }
                 
                 // Delay removing loading screen
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    print("Initial check - Removing loading screen. Final state:") // Debug print
-                    print("  Setup needed: \(setupNeeded)") // Debug print
-                    print("  Current step: \(currentStep)") // Debug print
-                    print("  Has conflicting apps: \(hasConflictingApps)") // Debug print
-                    print("  Extension enabled: \(extensionEnabled)") // Debug print
+                    print("Initial check - Final state:")
+                    print("  Setup needed: \(setupNeeded)")
+                    print("  Has conflicting apps: \(hasConflictingApps)")
+                    print("  Extension enabled: \(extensionEnabled)")
                     isLoading = false
                 }
             }
