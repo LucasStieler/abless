@@ -15,12 +15,14 @@ struct ContentView: View {
     @State private var extensionEnabled = false
     @State private var setupNeeded = false
     @State private var isLoading = true
+    @State private var opacity: CGFloat = 0 // For fade transitions
     
     var body: some View {
         NavigationView {
             Group {
                 if isLoading {
                     LoadingView()
+                        .transition(.opacity.combined(with: .scale(scale: 1.1)))
                 } else {
                     VStack {
                         switch currentStep {
@@ -90,9 +92,14 @@ struct ContentView: View {
                     .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStep)
                 }
             }
+            .opacity(opacity)
         }
         .preferredColorScheme(.light)
         .onAppear {
+            // Fade in the loading view
+            withAnimation(.easeIn(duration: 0.3)) {
+                opacity = 1
+            }
             checkInitialState()
         }
     }
@@ -127,11 +134,9 @@ struct ContentView: View {
                 
                 // Delay removing loading screen
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    print("Initial check - Final state:")
-                    print("  Setup needed: \(setupNeeded)")
-                    print("  Has conflicting apps: \(hasConflictingApps)")
-                    print("  Extension enabled: \(extensionEnabled)")
-                    isLoading = false
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        isLoading = false
+                    }
                 }
             }
         }
