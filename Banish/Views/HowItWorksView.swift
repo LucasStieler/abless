@@ -4,6 +4,7 @@ struct HowItWorksView: View {
     @Binding var currentStep: Int
     
     let steps = [
+        (icon: "checkmark.circle.fill", title: "Ready to Go", description: "Everything is set up correctly! Banish is ready to block distracting content."),
         (icon: "exclamationmark.triangle.fill", title: "App Detection", description: "Banish checks for apps with distracting short videos like YouTube, Instagram, and TikTok."),
         (icon: "safari.fill", title: "Safari Extension", description: "The Safari content blocker extension removes short video sections from these platforms."),
         (icon: "link.circle.fill", title: "Platform Access", description: "Access your favorite platforms through Safari for a distraction-free experience.")
@@ -14,17 +15,17 @@ struct HowItWorksView: View {
             // Content
             VStack(spacing: 24) {
                 // Header icon
-                Image(systemName: "questionmark.circle.fill")
+                Image(systemName: "shield.fill")
                     .font(.system(size: 60))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.blue, .purple],
+                            colors: [.green, .mint],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
                     .frame(minWidth: 44, minHeight: 44)
-                    .shadow(color: .blue.opacity(0.3), radius: 10, x: 0, y: 5)
+                    .shadow(color: .green.opacity(0.3), radius: 10, x: 0, y: 5)
                     .padding(.bottom, 8)
                 
                 Text("How Does It Work?")
@@ -41,7 +42,7 @@ struct HowItWorksView: View {
                                 .font(.system(size: 24))
                                 .foregroundStyle(
                                     LinearGradient(
-                                        colors: [.blue, .purple],
+                                        colors: index == 0 ? [.green, .mint] : [.blue, .purple],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     )
@@ -71,12 +72,12 @@ struct HowItWorksView: View {
                     currentStep += 1
                 }
             }) {
-                Text("Continue")
+                Text("Start Browsing")
                     .font(.system(size: 17, weight: .semibold))
                     .frame(width: 280, height: 50)
                     .background(
                         LinearGradient(
-                            colors: [.blue, .purple],
+                            colors: [.green, .mint],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
