@@ -98,33 +98,39 @@ struct ContentView: View {
     }
     
     private func checkInitialState() {
+        print("\n--- Starting Initial State Check ---") // Debug print
+        
         // First check for conflicting apps
         let detector = AppDetector()
         hasConflictingApps = detector.hasConflictingApps()
-        print("Conflicting apps detected: \(hasConflictingApps)") // Debug print
+        print("Initial check - Conflicting apps detected: \(hasConflictingApps)") // Debug print
         
         // Then check Safari extension status
         SFContentBlockerManager.getStateOfContentBlocker(
             withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
             DispatchQueue.main.async {
                 extensionEnabled = state?.isEnabled ?? false
-                print("Extension enabled: \(extensionEnabled)") // Debug print
+                print("Initial check - Extension enabled: \(extensionEnabled)") // Debug print
                 
                 // Set setup needed if either condition is true
                 setupNeeded = hasConflictingApps || !extensionEnabled
-                print("Setup needed: \(setupNeeded)") // Debug print
+                print("Initial check - Setup needed: \(setupNeeded)") // Debug print
                 
-                // Reset to beginning if setup is needed
+                // Always start at step 1 if setup is needed
                 if setupNeeded {
+                    print("Initial check - Resetting to setup flow") // Debug print
                     currentStep = 1
                     appState.resetSetup()
-                    print("Reset to setup flow") // Debug print
                 }
                 
                 // Delay removing loading screen
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Increased delay for testing
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    print("Initial check - Removing loading screen. Final state:") // Debug print
+                    print("  Setup needed: \(setupNeeded)") // Debug print
+                    print("  Current step: \(currentStep)") // Debug print
+                    print("  Has conflicting apps: \(hasConflictingApps)") // Debug print
+                    print("  Extension enabled: \(extensionEnabled)") // Debug print
                     isLoading = false
-                    print("Loading complete, setupNeeded: \(setupNeeded)") // Debug print
                 }
             }
         }

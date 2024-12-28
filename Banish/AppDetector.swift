@@ -26,25 +26,32 @@ class AppDetector {
     private let cacheTimeout: TimeInterval = 1.0 // 1 second cache
     
     public func getInstalledApps() -> [String] {
+        print("Checking for installed apps...") // Debug print
+        
         // Return cached results if recent
         if Date().timeIntervalSince(lastCheckTime) < cacheTimeout {
+            print("Returning cached results: \(cachedResults)") // Debug print
             return cachedResults
         }
         
-        // First, find all installed apps
         var foundApps: Set<String> = []
+        
         for (app, schemes) in appSchemes {
+            print("Checking \(app)...") // Debug print
             for scheme in schemes {
-                if let url = URL(string: scheme),
-                   UIApplication.shared.canOpenURL(url) {
-                    foundApps.insert(app.capitalized)
-                    break
+                if let url = URL(string: scheme) {
+                    let canOpen = UIApplication.shared.canOpenURL(url)
+                    print("Scheme \(scheme): \(canOpen ? "can open" : "cannot open")") // Debug print
+                    if canOpen {
+                        foundApps.insert(app.capitalized)
+                        break
+                    }
                 }
             }
         }
         
-        // Then return them in the fixed order
         let installedApps = appOrder.filter { foundApps.contains($0) }
+        print("Found installed apps: \(installedApps)") // Debug print
         
         // Update cache
         cachedResults = installedApps
@@ -53,6 +60,8 @@ class AppDetector {
     }
     
     public func hasConflictingApps() -> Bool {
-        return !getInstalledApps().isEmpty
+        let apps = getInstalledApps()
+        print("hasConflictingApps check: \(apps.isEmpty ? "no apps" : "has apps: \(apps)")") // Debug print
+        return !apps.isEmpty
     }
 } 

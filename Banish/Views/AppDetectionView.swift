@@ -98,6 +98,7 @@ struct AppDetectionView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
+            print("AppDetectionView appeared") // Debug print
             checkInstalledApps()
             startTimer()
         }
@@ -129,6 +130,7 @@ struct AppDetectionView: View {
     private func checkInstalledApps() {
         let detector = AppDetector()
         let newApps = detector.getInstalledApps()
+        print("AppDetectionView - Found apps: \(newApps)") // Debug print
         if newApps != installedApps {
             withAnimation {
                 installedApps = newApps
