@@ -4,16 +4,16 @@ class AppDetector {
     private let appOrder = ["YouTube", "Instagram", "TikTok"]
     
     private let appSchemes = [
-        "youtube": [
+        "YouTube": [
             "youtube://",
             "vnd.youtube://",
             "youtube-app://"
         ],
-        "instagram": [
+        "Instagram": [
             "instagram://",
             "instagram-stories://"
         ],
-        "tiktok": [
+        "TikTok": [
             "tiktok://",
             "snssdk1233://"
         ]
@@ -28,7 +28,6 @@ class AppDetector {
         
         var foundApps: Set<String> = []
         
-        // Check URL schemes first (simpler approach)
         print("🔗 Checking URL schemes...")
         for (app, schemes) in appSchemes {
             for scheme in schemes {
@@ -36,15 +35,14 @@ class AppDetector {
                     let canOpen = UIApplication.shared.canOpenURL(url)
                     print("  - \(app) [\(scheme)]: \(canOpen ? "✅" : "❌")")
                     if canOpen {
-                        print("  ✅ Adding \(app.capitalized) to found apps")
-                        foundApps.insert(app.capitalized)
-                        break // Found one working scheme, no need to check others
+                        print("  ✅ Adding \(app) to found apps")
+                        foundApps.insert(app)
+                        break
                     }
                 }
             }
         }
         
-        // Keep apps in the specified order
         let installedApps = appOrder.filter { foundApps.contains($0) }
         print("📱 Found apps: \(installedApps)")
         

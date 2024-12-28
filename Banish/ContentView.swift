@@ -66,6 +66,12 @@ struct ContentView: View {
                                         insertion: .move(edge: .trailing).combined(with: .opacity),
                                         removal: .move(edge: .leading).combined(with: .opacity)
                                     ))
+                            } else {
+                                HowItWorksView(currentStep: $currentStep)
+                                    .transition(.asymmetric(
+                                        insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .move(edge: .leading).combined(with: .opacity)
+                                    ))
                             }
                         case 4:
                             if setupNeeded {
@@ -75,7 +81,6 @@ struct ContentView: View {
                                         removal: .move(edge: .leading).combined(with: .opacity)
                                     ))
                                     .onAppear {
-                                        // Reset setupNeeded after completing setup
                                         setupNeeded = false
                                     }
                             }
