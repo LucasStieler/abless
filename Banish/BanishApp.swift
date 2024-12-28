@@ -10,7 +10,10 @@ import SwiftUI
 @main
 struct BanishApp: App {
     init() {
-        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        // Modern way to force portrait orientation
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            windowScene.requestGeometryUpdate(.iOS(interfaceOrientations: .portrait))
+        }
     }
     
     var body: some Scene {

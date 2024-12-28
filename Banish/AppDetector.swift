@@ -7,7 +7,8 @@ class AppDetector {
         "YouTube": [
             "youtube://",
             "vnd.youtube://",
-            "youtube-app://"
+            "youtube-app://",
+            "com.google.ios.youtube://"
         ],
         "Instagram": [
             "instagram://",
@@ -21,23 +22,27 @@ class AppDetector {
     
     private var cachedResults: [String] = []
     private var lastCheckTime: Date = .distantPast
-    private let cacheTimeout: TimeInterval = 0.0
+    private let cacheTimeout: TimeInterval = 1.0
     
     public func getInstalledApps() -> [String] {
-        print("🔍 Starting app detection...")
+        if Date().timeIntervalSince(lastCheckTime) < cacheTimeout {
+            return cachedResults
+        }
         
+        print("🔍 Starting app detection...")
         var foundApps: Set<String> = []
         
         print("🔗 Checking URL schemes...")
         for (app, schemes) in appSchemes {
-            for scheme in schemes {
+            var appFound = false
+            for scheme in schemes where !appFound {
                 if let url = URL(string: scheme) {
                     let canOpen = UIApplication.shared.canOpenURL(url)
                     print("  - \(app) [\(scheme)]: \(canOpen ? "✅" : "❌")")
                     if canOpen {
                         print("  ✅ Adding \(app) to found apps")
                         foundApps.insert(app)
-                        break
+                        appFound = true
                     }
                 }
             }
@@ -46,8 +51,11 @@ class AppDetector {
         let installedApps = appOrder.filter { foundApps.contains($0) }
         print("📱 Found apps: \(installedApps)")
         
-        cachedResults = installedApps
-        lastCheckTime = Date()
+        if !installedApps.isEmpty {
+            cachedResults = installedApps
+            lastCheckTime = Date()
+        }
+        
         return installedApps
     }
     
