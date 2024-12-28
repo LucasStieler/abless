@@ -98,22 +98,33 @@ struct ContentView: View {
     }
     
     private func checkInitialState() {
+        // First check for conflicting apps
         let detector = AppDetector()
-        let hasApps = detector.hasConflictingApps()
+        hasConflictingApps = detector.hasConflictingApps()
+        print("Conflicting apps detected: \(hasConflictingApps)") // Debug print
         
+        // Then check Safari extension status
         SFContentBlockerManager.getStateOfContentBlocker(
             withIdentifier: "io.banish.app.ContentBlockerExtension") { state, error in
             DispatchQueue.main.async {
-                let extensionDisabled = !(state?.isEnabled ?? false)
-                setupNeeded = hasApps || extensionDisabled
+                extensionEnabled = state?.isEnabled ?? false
+                print("Extension enabled: \(extensionEnabled)") // Debug print
                 
+                // Set setup needed if either condition is true
+                setupNeeded = hasConflictingApps || !extensionEnabled
+                print("Setup needed: \(setupNeeded)") // Debug print
+                
+                // Reset to beginning if setup is needed
                 if setupNeeded {
                     currentStep = 1
                     appState.resetSetup()
+                    print("Reset to setup flow") // Debug print
                 }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                // Delay removing loading screen
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Increased delay for testing
                     isLoading = false
+                    print("Loading complete, setupNeeded: \(setupNeeded)") // Debug print
                 }
             }
         }

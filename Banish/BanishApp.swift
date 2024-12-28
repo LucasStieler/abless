@@ -20,8 +20,8 @@ struct BanishApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoadingView()
-                .preferredColorScheme(.light) // Force light mode
+            ContentView()
+                .preferredColorScheme(.light)
         }
     }
 }
