@@ -13,17 +13,10 @@ struct LoadingView: View {
                 ContentView()
                     .transition(.opacity)
             } else {
-                ZStack {
-                    // Background gradient
-                    LinearGradient(
-                        colors: [.blue, .purple],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                    .ignoresSafeArea()
-                    
+                VStack {
+                    // Content
                     VStack(spacing: 32) {
-                        // App icon with minimum touch target
+                        // App icon
                         Image(systemName: "shield.fill")
                             .font(.system(size: 80))
                             .foregroundColor(.white)
@@ -38,7 +31,7 @@ struct LoadingView: View {
                                 .foregroundColor(.white)
                                 .opacity(opacity)
                             
-                            // Tagline with proper text size
+                            // Tagline
                             Text("Let distracting short videos vanish")
                                 .font(.system(size: 17))
                                 .foregroundColor(.white.opacity(0.9))
@@ -46,10 +39,20 @@ struct LoadingView: View {
                                 .offset(x: textOffset)
                                 .multilineTextAlignment(.center)
                         }
-                        .padding(.horizontal, 24)
-                        .frame(maxWidth: 500)
                     }
+                    .padding(.top, 60)
+                    
+                    Spacer()
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(
+                    LinearGradient(
+                        colors: [.blue, .purple],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .ignoresSafeArea()
+                )
             }
         }
         .onAppear {
