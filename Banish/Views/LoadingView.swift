@@ -32,39 +32,37 @@ struct LoadingView: View {
                             .opacity(opacity)
                             .scaleEffect(scale)
                         
-                        // Animated text
-                        Text("Distracting Short Videos")
+                        // Single message text
+                        Text("Let distracting short videos vanish")
                             .font(.title2)
+                            .bold()
                             .foregroundColor(.white)
                             .opacity(textOpacity)
                             .offset(x: textOffset)
-                        
-                        Text("will vanish")
-                            .font(.title)
-                            .bold()
-                            .foregroundColor(.white)
-                            .opacity(opacity)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                     }
                 }
             }
         }
         .onAppear {
-            // Initial animation
+            // Initial animation for icon and text
             withAnimation(.easeOut(duration: 0.8)) {
                 opacity = 1
                 scale = 1
             }
             
-            // Text vanishing animation
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // Text fade out
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.easeInOut(duration: 0.5)) {
                     textOpacity = 0
+                    opacity = 0
                     textOffset = -50
                 }
             }
             
             // Transition to main content
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.2) {
                 withAnimation(.easeIn(duration: 0.5)) {
                     showMainContent = true
                 }
