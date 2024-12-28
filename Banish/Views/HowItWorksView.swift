@@ -81,15 +81,15 @@ struct HowItWorksView: View {
             
             // Bottom button
             if isSetupComplete {
-                Button("Close App") {
-                    exit(0)
-                }
-                .buttonStyle(PrimaryButtonStyle())
-            } else {
                 Button("Start Browsing") {
                     currentStep += 1
                 }
                 .buttonStyle(SubtleButtonStyle())
+            } else {
+                Button("Close App") {
+                    exit(0)
+                }
+                .buttonStyle(PrimaryButtonStyle())
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
