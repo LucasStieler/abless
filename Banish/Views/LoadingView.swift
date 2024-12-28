@@ -32,11 +32,17 @@ struct LoadingView: View {
                             .opacity(opacity)
                             .scaleEffect(scale)
                         
-                        // Single message text
-                        Text("Let distracting short videos vanish")
-                            .font(.title2)
+                        // App name
+                        Text("Banish")
+                            .font(.largeTitle)
                             .bold()
                             .foregroundColor(.white)
+                            .opacity(opacity)
+                        
+                        // Tagline
+                        Text("Let distracting short videos vanish")
+                            .font(.title3)
+                            .foregroundColor(.white.opacity(0.9))
                             .opacity(textOpacity)
                             .offset(x: textOffset)
                             .multilineTextAlignment(.center)
@@ -46,7 +52,7 @@ struct LoadingView: View {
             }
         }
         .onAppear {
-            // Initial animation for icon and text
+            // Initial animation for icon and app name
             withAnimation(.easeOut(duration: 0.8)) {
                 opacity = 1
                 scale = 1
