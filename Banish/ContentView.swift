@@ -53,31 +53,33 @@ struct ContentView: View {
                                         removal: .move(edge: .leading).combined(with: .opacity)
                                     ))
                             } else {
-                                HowItWorksView(currentStep: $currentStep)
+                                SafariLoginView(currentStep: $currentStep, isSetupComplete: true)
                                     .transition(.asymmetric(
                                         insertion: .move(edge: .trailing).combined(with: .opacity),
                                         removal: .move(edge: .leading).combined(with: .opacity)
                                     ))
                             }
                         case 3:
-                            if setupNeeded {
-                                SafariExtensionGuideView(currentStep: $currentStep)
-                                    .transition(.asymmetric(
-                                        insertion: .move(edge: .trailing).combined(with: .opacity),
-                                        removal: .move(edge: .leading).combined(with: .opacity)
-                                    ))
-                            }
+                            SafariExtensionGuideView(currentStep: $currentStep)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                    removal: .move(edge: .leading).combined(with: .opacity)
+                                ))
                         case 4:
-                            if setupNeeded {
-                                SafariLoginView(currentStep: $currentStep, isSetupComplete: false)
-                                    .transition(.asymmetric(
-                                        insertion: .move(edge: .trailing).combined(with: .opacity),
-                                        removal: .move(edge: .leading).combined(with: .opacity)
-                                    ))
-                                    .onAppear {
-                                        setupNeeded = false
-                                    }
-                            }
+                            SafariLoginView(currentStep: $currentStep, isSetupComplete: false)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                    removal: .move(edge: .leading).combined(with: .opacity)
+                                ))
+                                .onAppear {
+                                    setupNeeded = false
+                                }
+                        case 5:
+                            HowItWorksView(currentStep: $currentStep)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                    removal: .move(edge: .leading).combined(with: .opacity)
+                                ))
                         default:
                             HowItWorksView(currentStep: $currentStep)
                                 .transition(.asymmetric(
