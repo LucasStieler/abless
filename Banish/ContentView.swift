@@ -100,11 +100,8 @@ struct ContentView: View {
                 let extensionDisabled = !(state?.isEnabled ?? false)
                 setupNeeded = hasApps || extensionDisabled
                 
-                if hasApps {
-                    currentStep = 2
-                    appState.resetSetup()
-                } else if extensionDisabled {
-                    currentStep = 3
+                if setupNeeded {
+                    currentStep = 1  // Start with Welcome view
                     appState.resetSetup()
                 }
             }
