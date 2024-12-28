@@ -5,6 +5,9 @@ struct AppDetectionView: View {
     @State private var installedApps: [String] = []
     @Environment(\.scenePhase) private var scenePhase
     
+    // Add timer control
+    @State private var timer: Timer?
+    
     var body: some View {
         VStack(spacing: 24) {
             // Header icon with gradient
@@ -92,15 +95,31 @@ struct AppDetectionView: View {
         .padding(.vertical, 20)
         .onAppear {
             checkInstalledApps()
+            startTimer()
+        }
+        .onDisappear {
+            stopTimer()
         }
         .onChange(of: scenePhase) { phase in
             if phase == .active {
                 checkInstalledApps()
+                startTimer()
+            } else {
+                stopTimer()
             }
         }
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+    }
+    
+    private func startTimer() {
+        stopTimer()
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             checkInstalledApps()
         }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
     
     private func checkInstalledApps() {

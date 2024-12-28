@@ -6,48 +6,46 @@ class AppDetector {
             "youtube://",
             "vnd.youtube://",
             "youtube-app://",
-            "com.google.ios.youtube://",
-            "goog.youtube://"
+            "com.google.ios.youtube://"
         ],
         "instagram": [
             "instagram://",
-            "instagram-stories://",
-            "instagram-reels://"
+            "instagram-stories://"
         ],
         "tiktok": [
             "tiktok://",
-            "snssdk1233://",
-            "tiktok.com://"
+            "snssdk1233://"
         ]
     ]
     
-    public func hasConflictingApps() -> Bool {
-        return !getInstalledApps().isEmpty
-    }
+    private var cachedResults: [String] = []
+    private var lastCheckTime: Date = .distantPast
+    private let cacheTimeout: TimeInterval = 1.0 // 1 second cache
     
     public func getInstalledApps() -> [String] {
+        // Return cached results if recent
+        if Date().timeIntervalSince(lastCheckTime) < cacheTimeout {
+            return cachedResults
+        }
+        
         var installedApps: [String] = []
-        
-        print("Starting app detection check...")
-        
         for (app, schemes) in appSchemes {
-            var appFound = false
             for scheme in schemes {
-                if let url = URL(string: scheme) {
-                    if UIApplication.shared.canOpenURL(url) {
-                        print("Found installed app: \(app) with scheme: \(scheme)")
-                        if !appFound {  // Prevent duplicates
-                            installedApps.append(app.capitalized)
-                            appFound = true
-                        }
-                    } else {
-                        print("Could not open URL scheme: \(scheme)")
-                    }
+                if let url = URL(string: scheme),
+                   UIApplication.shared.canOpenURL(url) {
+                    installedApps.append(app.capitalized)
+                    break // Exit inner loop once we find a match
                 }
             }
         }
         
-        print("Installed apps found: \(installedApps)")
+        // Update cache
+        cachedResults = installedApps
+        lastCheckTime = Date()
         return installedApps
+    }
+    
+    public func hasConflictingApps() -> Bool {
+        return !getInstalledApps().isEmpty
     }
 } 
