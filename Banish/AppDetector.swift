@@ -1,6 +1,9 @@
 import UIKit
 
 class AppDetector {
+    // Define a fixed order for display
+    private let appOrder = ["YouTube", "Instagram", "TikTok"]
+    
     public let appSchemes = [
         "youtube": [
             "youtube://",
@@ -28,16 +31,20 @@ class AppDetector {
             return cachedResults
         }
         
-        var installedApps: [String] = []
+        // First, find all installed apps
+        var foundApps: Set<String> = []
         for (app, schemes) in appSchemes {
             for scheme in schemes {
                 if let url = URL(string: scheme),
                    UIApplication.shared.canOpenURL(url) {
-                    installedApps.append(app.capitalized)
-                    break // Exit inner loop once we find a match
+                    foundApps.insert(app.capitalized)
+                    break
                 }
             }
         }
+        
+        // Then return them in the fixed order
+        let installedApps = appOrder.filter { foundApps.contains($0) }
         
         // Update cache
         cachedResults = installedApps

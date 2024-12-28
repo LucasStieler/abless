@@ -13,6 +13,11 @@ import BackgroundTasks
 struct BanishApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    init() {
+        // Force portrait orientation
+        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+    }
+    
     var body: some Scene {
         WindowGroup {
             LoadingView()
