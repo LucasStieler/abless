@@ -1,3 +1,5 @@
+import SwiftUI
+
 struct WelcomeView: View {
     @Binding var currentStep: Int
     
@@ -59,4 +61,8 @@ struct WelcomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity) // Fill available space
         .padding(.vertical, 20) // Vertical padding
     }
+}
+
+#Preview {
+    WelcomeView(currentStep: .constant(1))
 } 
