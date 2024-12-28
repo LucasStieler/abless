@@ -4,7 +4,6 @@ struct HowItWorksView: View {
     @Binding var currentStep: Int
     
     let steps = [
-        (icon: "checkmark.circle.fill", title: "Ready to Go", description: "Everything is set up correctly! Banish is ready to block distracting content."),
         (icon: "exclamationmark.triangle.fill", title: "App Detection", description: "Banish checks for apps with distracting short videos like YouTube, Instagram, and TikTok."),
         (icon: "safari.fill", title: "Safari Extension", description: "The Safari content blocker extension removes short video sections from these platforms."),
         (icon: "link.circle.fill", title: "Platform Access", description: "Access your favorite platforms through Safari for a distraction-free experience.")
@@ -28,10 +27,23 @@ struct HowItWorksView: View {
                     .shadow(color: .green.opacity(0.3), radius: 10, x: 0, y: 5)
                     .padding(.bottom, 8)
                 
-                Text("How Does It Work?")
+                // Success state
+                Text("Ready to Go")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(.primary)
                     .multilineTextAlignment(.center)
+                
+                Text("Everything is set up correctly!")
+                    .font(.system(size: 17))
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 16)
+                
+                // How it works section
+                Text("How Does It Work?")
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 8)
                 
                 // Steps
                 VStack(spacing: 24) {
@@ -42,7 +54,7 @@ struct HowItWorksView: View {
                                 .font(.system(size: 24))
                                 .foregroundStyle(
                                     LinearGradient(
-                                        colors: index == 0 ? [.green, .mint] : [.blue, .purple],
+                                        colors: [.blue, .purple],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     )

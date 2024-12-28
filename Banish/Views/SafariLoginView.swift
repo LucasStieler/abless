@@ -4,6 +4,7 @@ import SwiftUI
 struct SafariLoginView: View {
     /// Binding to track the current step in the setup process
     @Binding var currentStep: Int
+    let isSetupComplete: Bool
     
     /// Array of tuples containing platform names and their URLs
     private let platforms = [
@@ -67,16 +68,20 @@ struct SafariLoginView: View {
             
             // Bottom button
             Button(action: {
-                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                    currentStep += 1
+                if isSetupComplete {
+                    exit(0) // Close the app
+                } else {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                        currentStep += 1
+                    }
                 }
             }) {
-                Text("Continue")
+                Text(isSetupComplete ? "Close App" : "Continue")
                     .font(.system(size: 17, weight: .semibold))
                     .frame(width: 280, height: 50)
                     .background(
                         LinearGradient(
-                            colors: [.blue, .purple],
+                            colors: isSetupComplete ? [.green, .mint] : [.blue, .purple],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -92,5 +97,5 @@ struct SafariLoginView: View {
 }
 
 #Preview {
-    SafariLoginView(currentStep: .constant(4))
+    SafariLoginView(currentStep: .constant(4), isSetupComplete: false)
 } 

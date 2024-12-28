@@ -20,11 +20,19 @@ struct ContentView: View {
             VStack {
                 switch currentStep {
                 case 1:
-                    WelcomeView(currentStep: $currentStep)
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .trailing).combined(with: .opacity),
-                            removal: .move(edge: .leading).combined(with: .opacity)
-                        ))
+                    if setupNeeded {
+                        WelcomeView(currentStep: $currentStep)
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
+                    } else {
+                        HowItWorksView(currentStep: $currentStep)
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
+                    }
                 case 2:
                     if setupNeeded {
                         AppDetectionView(currentStep: $currentStep)
@@ -33,7 +41,7 @@ struct ContentView: View {
                                 removal: .move(edge: .leading).combined(with: .opacity)
                             ))
                     } else {
-                        HowItWorksView(currentStep: $currentStep)
+                        SafariLoginView(currentStep: $currentStep, isSetupComplete: true)
                             .transition(.asymmetric(
                                 insertion: .move(edge: .trailing).combined(with: .opacity),
                                 removal: .move(edge: .leading).combined(with: .opacity)
@@ -46,28 +54,26 @@ struct ContentView: View {
                                 insertion: .move(edge: .trailing).combined(with: .opacity),
                                 removal: .move(edge: .leading).combined(with: .opacity)
                             ))
-                    } else {
-                        SafariLoginView(currentStep: $currentStep)
+                    }
+                case 4:
+                    if setupNeeded {
+                        SafariLoginView(currentStep: $currentStep, isSetupComplete: false)
                             .transition(.asymmetric(
                                 insertion: .move(edge: .trailing).combined(with: .opacity),
                                 removal: .move(edge: .leading).combined(with: .opacity)
                             ))
                     }
-                case 4:
-                    SafariLoginView(currentStep: $currentStep)
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .trailing).combined(with: .opacity),
-                            removal: .move(edge: .leading).combined(with: .opacity)
-                        ))
                 case 5:
-                    SuccessView()
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .trailing).combined(with: .opacity),
-                            removal: .move(edge: .leading).combined(with: .opacity)
-                        ))
-                        .onAppear {
-                            appState.completeSetup()
-                        }
+                    if setupNeeded {
+                        SuccessView()
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
+                            .onAppear {
+                                appState.completeSetup()
+                            }
+                    }
                 default:
                     WelcomeView(currentStep: $currentStep)
                         .transition(.asymmetric(
