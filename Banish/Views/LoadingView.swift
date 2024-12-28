@@ -47,6 +47,10 @@ struct LoadingView: View {
             )
             .ignoresSafeArea()
         )
+        .transition(.asymmetric(
+            insertion: .opacity,
+            removal: .opacity.combined(with: .scale(scale: 1.1))
+        ))
         .onAppear {
             // Initial animation
             withAnimation(.easeOut(duration: 0.8)) {

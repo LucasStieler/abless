@@ -97,6 +97,10 @@ struct AppDetectionView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .transition(.asymmetric(
+            insertion: .move(edge: .trailing).combined(with: .opacity),
+            removal: .move(edge: .leading).combined(with: .opacity)
+        ))
         .onAppear {
             print("AppDetectionView appeared") // Debug print
             checkInstalledApps()

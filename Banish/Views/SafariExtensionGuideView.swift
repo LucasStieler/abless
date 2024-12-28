@@ -95,6 +95,10 @@ struct SafariExtensionGuideView: View {
             .padding(.bottom, 16)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .transition(.asymmetric(
+            insertion: .move(edge: .trailing).combined(with: .opacity),
+            removal: .move(edge: .leading).combined(with: .opacity)
+        ))
         .alert("Extension Not Enabled", isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         } message: {
