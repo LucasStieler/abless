@@ -3,17 +3,11 @@ import UIKit
 class AppDetector {
     private let appOrder = ["YouTube", "Instagram", "TikTok"]
     
-    public let appSchemes = [
+    private let appSchemes = [
         "youtube": [
             "youtube://",
             "vnd.youtube://",
-            "youtube-app://",
-            "com.google.ios.youtube://",
-            "goog.youtube://",
-            "youtube-x-callback://",
-            "youtubeapp://",
-            "googleyoutube://",
-            "youtube.com://"
+            "youtube-app://"
         ],
         "instagram": [
             "instagram://",
@@ -21,11 +15,7 @@ class AppDetector {
         ],
         "tiktok": [
             "tiktok://",
-            "snssdk1233://",
-            "tiktokv://",
-            "tiktok.com://",
-            "musically://",
-            "musical.ly://"
+            "snssdk1233://"
         ]
     ]
     
@@ -38,41 +28,23 @@ class AppDetector {
         
         var foundApps: Set<String> = []
         
-        let bundleIDs = [
-            "com.google.ios.youtube": "YouTube",
-            "com.zhiliaoapp.musically": "TikTok",
-            "com.burbn.instagram": "Instagram",
-            "com.google.ios.youtube.GoogleAppYouTube": "YouTube",
-            "com.ss.iphone.ugc.Aweme": "TikTok"
-        ]
-        
-        print("📱 Checking bundle IDs...")
-        for (bundleID, appName) in bundleIDs {
-            if let url = URL(string: "\(bundleID)://") {
-                let canOpen = UIApplication.shared.canOpenURL(url)
-                print("  - \(bundleID): \(canOpen ? "✅" : "❌")")
-                if canOpen {
-                    foundApps.insert(appName)
-                }
-            }
-        }
-        
+        // Check URL schemes first (simpler approach)
         print("🔗 Checking URL schemes...")
         for (app, schemes) in appSchemes {
-            if !foundApps.contains(app.capitalized) {
-                for scheme in schemes {
-                    if let url = URL(string: scheme) {
-                        let canOpen = UIApplication.shared.canOpenURL(url)
-                        print("  - \(app) [\(scheme)]: \(canOpen ? "✅" : "❌")")
-                        if canOpen {
-                            foundApps.insert(app.capitalized)
-                            break
-                        }
+            for scheme in schemes {
+                if let url = URL(string: scheme) {
+                    let canOpen = UIApplication.shared.canOpenURL(url)
+                    print("  - \(app) [\(scheme)]: \(canOpen ? "✅" : "❌")")
+                    if canOpen {
+                        print("  ✅ Adding \(app.capitalized) to found apps")
+                        foundApps.insert(app.capitalized)
+                        break // Found one working scheme, no need to check others
                     }
                 }
             }
         }
         
+        // Keep apps in the specified order
         let installedApps = appOrder.filter { foundApps.contains($0) }
         print("📱 Found apps: \(installedApps)")
         
