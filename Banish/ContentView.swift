@@ -20,21 +20,46 @@ struct ContentView: View {
                 switch currentStep {
                 case 1:
                     WelcomeView(currentStep: $currentStep)
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
                 case 2:
                     AppDetectionView(currentStep: $currentStep)
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
                 case 3:
                     SafariExtensionGuideView(currentStep: $currentStep)
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
                 case 4:
                     SafariLoginView(currentStep: $currentStep)
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
                 case 5:
                     SuccessView()
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
                         .onAppear {
                             appState.completeSetup()
                         }
                 default:
                     WelcomeView(currentStep: $currentStep)
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                            removal: .move(edge: .leading).combined(with: .opacity)
+                        ))
                 }
             }
+            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStep)
         }
         .preferredColorScheme(.light)
         .onAppear {
