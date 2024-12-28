@@ -14,75 +14,82 @@ struct ContentView: View {
     @State private var hasConflictingApps = false
     @State private var extensionEnabled = false
     @State private var setupNeeded = false
+    @State private var isLoading = true
     
     var body: some View {
         NavigationView {
-            VStack {
-                switch currentStep {
-                case 1:
-                    if setupNeeded {
-                        WelcomeView(currentStep: $currentStep)
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .trailing).combined(with: .opacity),
-                                removal: .move(edge: .leading).combined(with: .opacity)
-                            ))
-                    } else {
-                        HowItWorksView(currentStep: $currentStep)
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .trailing).combined(with: .opacity),
-                                removal: .move(edge: .leading).combined(with: .opacity)
-                            ))
-                    }
-                case 2:
-                    if setupNeeded {
-                        AppDetectionView(currentStep: $currentStep)
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .trailing).combined(with: .opacity),
-                                removal: .move(edge: .leading).combined(with: .opacity)
-                            ))
-                    } else {
-                        SafariLoginView(currentStep: $currentStep, isSetupComplete: true)
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .trailing).combined(with: .opacity),
-                                removal: .move(edge: .leading).combined(with: .opacity)
-                            ))
-                    }
-                case 3:
-                    if setupNeeded {
-                        SafariExtensionGuideView(currentStep: $currentStep)
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .trailing).combined(with: .opacity),
-                                removal: .move(edge: .leading).combined(with: .opacity)
-                            ))
-                    }
-                case 4:
-                    if setupNeeded {
-                        SafariLoginView(currentStep: $currentStep, isSetupComplete: false)
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .trailing).combined(with: .opacity),
-                                removal: .move(edge: .leading).combined(with: .opacity)
-                            ))
-                    }
-                case 5:
-                    if setupNeeded {
-                        SuccessView()
-                            .transition(.asymmetric(
-                                insertion: .move(edge: .trailing).combined(with: .opacity),
-                                removal: .move(edge: .leading).combined(with: .opacity)
-                            ))
-                            .onAppear {
-                                appState.completeSetup()
+            Group {
+                if isLoading {
+                    LoadingView()
+                } else {
+                    VStack {
+                        switch currentStep {
+                        case 1:
+                            if setupNeeded {
+                                WelcomeView(currentStep: $currentStep)
+                                    .transition(.asymmetric(
+                                        insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .move(edge: .leading).combined(with: .opacity)
+                                    ))
+                            } else {
+                                HowItWorksView(currentStep: $currentStep)
+                                    .transition(.asymmetric(
+                                        insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .move(edge: .leading).combined(with: .opacity)
+                                    ))
                             }
+                        case 2:
+                            if setupNeeded {
+                                AppDetectionView(currentStep: $currentStep)
+                                    .transition(.asymmetric(
+                                        insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .move(edge: .leading).combined(with: .opacity)
+                                    ))
+                            } else {
+                                SafariLoginView(currentStep: $currentStep, isSetupComplete: true)
+                                    .transition(.asymmetric(
+                                        insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .move(edge: .leading).combined(with: .opacity)
+                                    ))
+                            }
+                        case 3:
+                            if setupNeeded {
+                                SafariExtensionGuideView(currentStep: $currentStep)
+                                    .transition(.asymmetric(
+                                        insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .move(edge: .leading).combined(with: .opacity)
+                                    ))
+                            }
+                        case 4:
+                            if setupNeeded {
+                                SafariLoginView(currentStep: $currentStep, isSetupComplete: false)
+                                    .transition(.asymmetric(
+                                        insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .move(edge: .leading).combined(with: .opacity)
+                                    ))
+                            }
+                        case 5:
+                            if setupNeeded {
+                                SuccessView()
+                                    .transition(.asymmetric(
+                                        insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .move(edge: .leading).combined(with: .opacity)
+                                    ))
+                                    .onAppear {
+                                        appState.completeSetup()
+                                    }
+                            }
+                        default:
+                            WelcomeView(currentStep: $currentStep)
+                                .transition(.asymmetric(
+                                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                                    removal: .move(edge: .leading).combined(with: .opacity)
+                                ))
+                        }
                     }
-                default:
-                    WelcomeView(currentStep: $currentStep)
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .trailing).combined(with: .opacity),
-                            removal: .move(edge: .leading).combined(with: .opacity)
-                        ))
+                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStep)
                 }
             }
-            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStep)
         }
         .preferredColorScheme(.light)
         .onAppear {
@@ -101,8 +108,12 @@ struct ContentView: View {
                 setupNeeded = hasApps || extensionDisabled
                 
                 if setupNeeded {
-                    currentStep = 1  // Start with Welcome view
+                    currentStep = 1
                     appState.resetSetup()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    isLoading = false
                 }
             }
         }
