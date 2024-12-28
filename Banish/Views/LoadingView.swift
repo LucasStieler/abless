@@ -40,7 +40,7 @@ struct LoadingView: View {
                                 .multilineTextAlignment(.center)
                         }
                     }
-                    .padding(.top, 60)
+                    .padding(.top, 160)
                     
                     Spacer()
                 }
