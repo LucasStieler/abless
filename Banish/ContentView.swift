@@ -39,7 +39,7 @@ struct ContentView: View {
                                         removal: .move(edge: .leading).combined(with: .opacity)
                                     ))
                             } else {
-                                SafariLoginView(currentStep: $currentStep, isSetupComplete: true)
+                                HowItWorksView(currentStep: $currentStep)
                                     .transition(.asymmetric(
                                         insertion: .move(edge: .trailing).combined(with: .opacity),
                                         removal: .move(edge: .leading).combined(with: .opacity)
