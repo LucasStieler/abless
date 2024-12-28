@@ -9,7 +9,9 @@ class AppDetector {
             "youtube://",
             "vnd.youtube://",
             "youtube-app://",
-            "com.google.ios.youtube://"
+            "com.google.ios.youtube://",
+            "goog.youtube://",
+            "youtube-x-callback://"
         ],
         "instagram": [
             "instagram://",
