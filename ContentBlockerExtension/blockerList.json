@@ -1,28 +1,49 @@
 [
     {
-        "trigger": {
-            "url-filter": ".*youtube\\.com/shorts.*"
-        },
-        "action": {
-            "type": "block"
-        }
+      "action": {
+        "type": "block"
+      },
+      "trigger": {
+        "url-filter": "https://.*\\.youtube\\.com/shorts/.*"
+      }
     },
     {
-        "trigger": {
-            "url-filter": ".*youtube\\.com.*"
-        },
-        "action": {
-            "type": "css-display-none",
-            "selector": [
-                "ytd-shorts",
-                "ytd-reel-shelf-renderer",
-                "ytd-rich-shelf-renderer[is-shorts]",
-                "ytd-mini-guide-entry-renderer[aria-label*='Shorts']",
-                "ytd-guide-entry-renderer[aria-label*='Shorts']",
-                "#shorts-container",
-                "ytd-shorts-video-renderer",
-                "ytd-shorts-shelf-renderer"
-            ]
-        }
+      "action": {
+        "type": "block"
+      },
+      "trigger": {
+        "url-filter": "https://.*\\.tiktok\\.com/.*"
+      }
+    },
+    {
+      "action": {
+        "type": "block"
+      },
+      "trigger": {
+        "url-filter": "https://.*\\.instagram\\.com/reels/.*"
+      }
+    },
+    {
+      "action": {
+        "type": "css-display-none",
+        "selector": "#shorts, .shorts-section, .reels, .tiktok-feed"
+      },
+      "trigger": {
+        "url-filter": ".*"
+      }
+    },
+    {
+      "action": {
+        "type": "block"
+      },
+      "trigger": {
+        "if-domain": [
+          "youtube.com",
+          "tiktok.com",
+          "instagram.com"
+        ],
+        "url-filter": ".*(shorts|reels|feed|short-videos).*"
+      }
     }
-] 
+  ]
+  
