@@ -1,2 +1,28 @@
 [
+    {
+        "trigger": {
+            "url-filter": ".*youtube\\.com/shorts.*"
+        },
+        "action": {
+            "type": "block"
+        }
+    },
+    {
+        "trigger": {
+            "url-filter": ".*youtube\\.com.*"
+        },
+        "action": {
+            "type": "css-display-none",
+            "selector": [
+                "ytd-shorts",
+                "ytd-reel-shelf-renderer",
+                "ytd-rich-shelf-renderer[is-shorts]",
+                "ytd-mini-guide-entry-renderer[aria-label*='Shorts']",
+                "ytd-guide-entry-renderer[aria-label*='Shorts']",
+                "#shorts-container",
+                "ytd-shorts-video-renderer",
+                "ytd-shorts-shelf-renderer"
+            ]
+        }
+    }
 ] 
