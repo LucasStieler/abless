@@ -1,5 +1,5 @@
 [
-    // YouTube Shorts
+    // YouTube Shorts - Only block shorts-specific content
     {
         "trigger": {
             "url-filter": ".*youtube\\.com/shorts.*",
@@ -23,14 +23,11 @@
                 "ytd-mini-guide-entry-renderer[aria-label*='Shorts']",
                 "ytd-guide-entry-renderer[aria-label*='Shorts']",
                 "ytd-reel-video-renderer",
-                "ytd-shorts",
-                "[aria-label*='Shorts']",
-                "[href*='/shorts']",
-                "ytd-rich-grid-row[is-shorts]"
+                "[href*='/shorts']"
             ]
         }
     },
-    // Instagram Reels
+    // Instagram Reels - Only block reels-specific content
     {
         "trigger": {
             "url-filter": ".*instagram\\.com/reels.*",
@@ -52,24 +49,11 @@
                 "[href*='/reels']",
                 "[role='tablist'] a[href='/reels']",
                 "div[role='menuitem'][href*='/reels']",
-                "._aabd._aa8k._aanf",
-                "a.x1i10hfl[href*='reels']",
-                "div[role='tablist'] a[href*='reels']",
-                "div[data-media-type='Reels']",
-                "div[data-visualcompletion='loading-state'][style*='reels']"
+                "div[data-media-type='Reels']"
             ]
         }
     },
-    // TikTok
-    {
-        "trigger": {
-            "url-filter": ".*tiktok\\.com/@.*",
-            "url-filter-is-case-sensitive": false
-        },
-        "action": {
-            "type": "block"
-        }
-    },
+    // TikTok - Block only the feed and video recommendations
     {
         "trigger": {
             "url-filter": ".*tiktok\\.com.*",
@@ -80,19 +64,17 @@
             "type": "css-display-none",
             "selector": [
                 "div[data-e2e='recommend-list-item-container']",
-                "div[data-e2e='feed-item']",
-                "div[data-e2e='user-post-item']",
-                "div[class*='DivItemContainer']",
-                "[class*='feed-item']",
-                "[data-e2e*='video']"
+                "div[data-e2e='feed-item']"
             ]
         }
     },
-    // Block API endpoints
+    // Block only shorts-related API endpoints
     {
         "trigger": {
-            "url-filter": ".*(youtube\\.com/youtubei/v1/browse|youtube\\.com/youtubei/v1/next).*",
-            "resource-type": ["xmlhttprequest"]
+            "url-filter": ".*/youtubei/v1/browse\\?key=.*&prettyPrint=false.*",
+            "resource-type": ["xmlhttprequest"],
+            "url-filter-is-case-sensitive": false,
+            "if-domain": ["*youtube.com"]
         },
         "action": {
             "type": "block"
@@ -100,17 +82,9 @@
     },
     {
         "trigger": {
-            "url-filter": ".*(instagram\\.com/api/v1/clips|instagram\\.com/api/v1/reels).*",
-            "resource-type": ["xmlhttprequest"]
-        },
-        "action": {
-            "type": "block"
-        }
-    },
-    {
-        "trigger": {
-            "url-filter": ".*tiktok\\.com/api/recommend.*",
-            "resource-type": ["xmlhttprequest"]
+            "url-filter": ".*/api/v1/(clips|reels).*",
+            "resource-type": ["xmlhttprequest"],
+            "if-domain": ["*instagram.com"]
         },
         "action": {
             "type": "block"
