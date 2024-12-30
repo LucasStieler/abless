@@ -9,7 +9,8 @@
             "selector": [
                 "ytd-reel-shelf-renderer",
                 "ytd-rich-shelf-renderer[is-shorts]",
-                "[href*='/shorts']"
+                "ytd-mini-guide-entry-renderer[aria-label*='Shorts']",
+                "ytd-guide-entry-renderer[aria-label*='Shorts']"
             ]
         }
     },
@@ -21,8 +22,8 @@
         "action": {
             "type": "css-display-none",
             "selector": [
-                "[href*='/reels']",
-                "[role='tablist'] a[href='/reels']"
+                "[role='tablist'] a[href='/reels']",
+                "div[data-media-type='Reels']"
             ]
         }
     },
