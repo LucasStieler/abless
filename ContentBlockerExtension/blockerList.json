@@ -1,17 +1,7 @@
 [
     {
         "trigger": {
-            "url-filter": ".*youtube\\.com/shorts.*",
-            "url-filter-is-case-sensitive": false
-        },
-        "action": {
-            "type": "block"
-        }
-    },
-    {
-        "trigger": {
             "url-filter": ".*youtube\\.com.*",
-            "url-filter-is-case-sensitive": false,
             "if-domain": ["*youtube.com"]
         },
         "action": {
@@ -19,71 +9,33 @@
             "selector": [
                 "ytd-reel-shelf-renderer",
                 "ytd-rich-shelf-renderer[is-shorts]",
-                "ytd-mini-guide-entry-renderer[aria-label*='Shorts']",
-                "ytd-guide-entry-renderer[aria-label*='Shorts']",
-                "ytd-reel-video-renderer",
                 "[href*='/shorts']"
             ]
         }
     },
     {
         "trigger": {
-            "url-filter": ".*instagram\\.com/reels.*",
-            "url-filter-is-case-sensitive": false
-        },
-        "action": {
-            "type": "block"
-        }
-    },
-    {
-        "trigger": {
             "url-filter": ".*instagram\\.com.*",
-            "url-filter-is-case-sensitive": false,
             "if-domain": ["*instagram.com"]
         },
         "action": {
             "type": "css-display-none",
             "selector": [
                 "[href*='/reels']",
-                "[role='tablist'] a[href='/reels']",
-                "div[role='menuitem'][href*='/reels']",
-                "div[data-media-type='Reels']"
+                "[role='tablist'] a[href='/reels']"
             ]
         }
     },
     {
         "trigger": {
             "url-filter": ".*tiktok\\.com.*",
-            "url-filter-is-case-sensitive": false,
             "if-domain": ["*tiktok.com"]
         },
         "action": {
             "type": "css-display-none",
             "selector": [
-                "div[data-e2e='recommend-list-item-container']",
-                "div[data-e2e='feed-item']"
+                "div[data-e2e='recommend-list-item-container']"
             ]
-        }
-    },
-    {
-        "trigger": {
-            "url-filter": ".*/youtubei/v1/browse\\?key=.*&prettyPrint=false.*",
-            "resource-type": ["xmlhttprequest"],
-            "url-filter-is-case-sensitive": false,
-            "if-domain": ["*youtube.com"]
-        },
-        "action": {
-            "type": "block"
-        }
-    },
-    {
-        "trigger": {
-            "url-filter": ".*/api/v1/(clips|reels).*",
-            "resource-type": ["xmlhttprequest"],
-            "if-domain": ["*instagram.com"]
-        },
-        "action": {
-            "type": "block"
         }
     }
 ] 

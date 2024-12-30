@@ -1,67 +1,32 @@
 import UIKit
 
 class AppDetector {
-    private let appOrder = ["YouTube", "Instagram", "TikTok"]
-    
     private let appSchemes = [
-        "YouTube": [
-            "youtube://",
-            "vnd.youtube://",
-            "youtube-app://",
-            "com.google.ios.youtube://"
-        ],
-        "Instagram": [
-            "instagram://",
-            "instagram-stories://"
-        ],
-        "TikTok": [
-            "tiktok://",
-            "snssdk1233://"
-        ]
+        "YouTube": ["youtube://", "vnd.youtube://"],
+        "Instagram": ["instagram://"],
+        "TikTok": ["tiktok://"]
     ]
     
     private var cachedResults: [String] = []
-    private var lastCheckTime: Date = .distantPast
-    private let cacheTimeout: TimeInterval = 1.0
+    private var lastCheckTime: Date?
     
     public func getInstalledApps() -> [String] {
-        if Date().timeIntervalSince(lastCheckTime) < cacheTimeout {
+        if let lastCheck = lastCheckTime, Date().timeIntervalSince(lastCheck) < 300 {
             return cachedResults
         }
         
-        print("🔍 Starting app detection...")
-        var foundApps: Set<String> = []
-        
-        print("🔗 Checking URL schemes...")
-        for (app, schemes) in appSchemes {
-            var appFound = false
-            for scheme in schemes where !appFound {
-                if let url = URL(string: scheme) {
-                    let canOpen = UIApplication.shared.canOpenURL(url)
-                    print("  - \(app) [\(scheme)]: \(canOpen ? "✅" : "❌")")
-                    if canOpen {
-                        print("  ✅ Adding \(app) to found apps")
-                        foundApps.insert(app)
-                        appFound = true
-                    }
-                }
-            }
+        let foundApps = appSchemes.keys.filter { app in
+            appSchemes[app]?.contains { scheme in
+                UIApplication.shared.canOpenURL(URL(string: scheme)!)
+            } ?? false
         }
         
-        let installedApps = appOrder.filter { foundApps.contains($0) }
-        print("📱 Found apps: \(installedApps)")
-        
-        if !installedApps.isEmpty {
-            cachedResults = installedApps
-            lastCheckTime = Date()
-        }
-        
-        return installedApps
+        cachedResults = foundApps
+        lastCheckTime = Date()
+        return foundApps
     }
     
     public func hasConflictingApps() -> Bool {
-        let apps = getInstalledApps()
-        print("🚫 Conflicting apps check: \(apps)")
-        return !apps.isEmpty
+        !getInstalledApps().isEmpty
     }
 } 
