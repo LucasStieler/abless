@@ -1,5 +1,4 @@
 [
-    // YouTube Shorts - Only block shorts-specific content
     {
         "trigger": {
             "url-filter": ".*youtube\\.com/shorts.*",
@@ -27,7 +26,6 @@
             ]
         }
     },
-    // Instagram Reels - Only block reels-specific content
     {
         "trigger": {
             "url-filter": ".*instagram\\.com/reels.*",
@@ -53,7 +51,6 @@
             ]
         }
     },
-    // TikTok - Block only the feed and video recommendations
     {
         "trigger": {
             "url-filter": ".*tiktok\\.com.*",
@@ -68,7 +65,6 @@
             ]
         }
     },
-    // Block only shorts-related API endpoints
     {
         "trigger": {
             "url-filter": ".*/youtubei/v1/browse\\?key=.*&prettyPrint=false.*",
